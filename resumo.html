@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo &middot; Cordados e Peixes</title>
+<style>
+:root{
+  --abismo:#03101c; --fundo:#06182a; --card:#0c2637; --card2:#113347;
+  --linha:#1d5570; --texto:#e2f3fb; --suave:#9dc3d8;
+  --bio:#3fe3c9; --bio2:#0fb9a3; --ambar:#ffc14d; --coral:#ff8172;
+  --verde:#3ddc84; --cinza:#7a93a6; --roxo:#a98cff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1100px 600px at 15% -10%, #0d3a52 0%, transparent 60%),
+    radial-gradient(900px 500px at 90% 5%, #10304a 0%, transparent 55%),
+    linear-gradient(180deg,#06182a 0%, #03101c 100%);
+  background-attachment:fixed;
+  color:var(--texto); font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  line-height:1.6; padding-bottom:70px;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px}
+header.topo{background:linear-gradient(135deg,#062132 0%, #0a3b4f 55%, #0d5a5a 100%);
+  border-bottom:2px solid var(--bio2);padding:34px 0 26px}
+.selo{display:inline-block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--abismo);background:var(--bio);padding:5px 12px;border-radius:20px;font-weight:700}
+h1{font-size:2.05rem;margin:12px 0 6px;line-height:1.15;letter-spacing:-.5px}
+h1 span{color:var(--bio)}
+.sub{color:var(--suave);font-size:.98rem}
+
+nav.abas{position:sticky;top:0;z-index:40;background:rgba(4,20,34,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
+nav.abas .wrap{display:flex;gap:6px;overflow-x:auto;padding:9px 18px}
+nav.abas a{flex:0 0 auto;text-decoration:none;color:var(--suave);padding:8px 14px;border-radius:9px;
+  font-size:.9rem;font-weight:600;border:1px solid transparent;white-space:nowrap}
+nav.abas a:hover{background:var(--card);color:var(--texto)}
+nav.abas a.atual{background:var(--bio);color:var(--abismo);border-color:var(--bio)}
+
+main{padding-top:26px}
+.cartao{
+  background:linear-gradient(180deg, rgba(17,51,71,.5), rgba(12,38,55,.72));
+  border:1px solid var(--linha);border-radius:16px;padding:22px;margin-bottom:22px;
+  box-shadow:0 8px 26px rgba(0,0,0,.3);
+}
+.cartao > h2{color:var(--bio);font-size:1.28rem;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.cartao h3{color:var(--ambar);font-size:1.02rem;margin:16px 0 8px}
+.cartao p{color:#d6ecf7;margin-bottom:10px;font-size:.96rem}
+strong{color:#fff}
+
+ul.lista{margin:4px 0 12px 2px;list-style:none}
+ul.lista li{padding-left:20px;position:relative;margin-bottom:7px;color:#d6ecf7;font-size:.95rem}
+ul.lista li::before{content:"▸";position:absolute;left:0;color:var(--bio2);font-weight:800}
+
+.mapa{display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:center;margin:16px 0;font-size:.86rem}
+.no{background:var(--card2);border:1px solid var(--bio2);padding:8px 13px;border-radius:10px;font-weight:600;color:var(--texto)}
+.no.raiz{background:var(--bio);color:var(--abismo);border-color:var(--bio)}
+.no.alt{border-color:var(--ambar);color:var(--ambar)}
+.seta{color:var(--bio2);font-weight:800}
+
+.tabela-rolagem{overflow-x:auto;margin:14px 0;border-radius:12px;border:1px solid var(--linha)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.86rem}
+th,td{border:1px solid var(--linha);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:rgba(15,185,163,.18);color:var(--bio);font-weight:700}
+td:first-child{background:rgba(29,85,112,.35);font-weight:700;color:#fff}
+
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.mini{background:rgba(3,16,28,.55);border:1px solid var(--linha);border-radius:12px;padding:13px 15px}
+.mini b{color:var(--bio);display:block;margin-bottom:4px;font-size:.94rem}
+.mini span{font-size:.9rem;color:#cfe8f4}
+
+.alerta{border-left:4px solid var(--coral);background:rgba(255,129,114,.10);padding:12px 15px;
+  border-radius:0 12px 12px 0;margin:14px 0;font-size:.93rem}
+.alerta b{color:var(--coral)}
+.dica{border-left:4px solid var(--ambar);background:rgba(255,193,77,.09);padding:12px 15px;
+  border-radius:0 12px 12px 0;margin:14px 0;font-size:.93rem}
+.dica b{color:var(--ambar)}
+
+/* flashcards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:8px}
+.card{
+  background:rgba(3,16,28,.6);border:1px solid var(--linha);border-radius:13px;
+  padding:15px;cursor:pointer;min-height:104px;display:flex;flex-direction:column;justify-content:center;
+  transition:border-color .15s, transform .12s;
+}
+.card:hover{border-color:var(--bio);transform:translateY(-2px)}
+.card .frente{font-weight:700;color:#eaf7fd;font-size:.97rem}
+.card .verso{display:none;margin-top:8px;font-size:.9rem;color:#bfdcea;line-height:1.45}
+.card.virado{border-color:var(--bio2);background:rgba(15,185,163,.10)}
+.card.virado .verso{display:block}
+.card .toque{font-size:.76rem;color:var(--cinza);margin-top:7px}
+.card.virado .toque{display:none}
+.card.marcado{border-color:var(--ambar)}
+.marcar{margin-top:9px}
+.marcar button{background:transparent;border:1px solid var(--linha);color:var(--suave);
+  padding:4px 9px;border-radius:7px;font-size:.78rem;cursor:pointer;font-weight:600}
+.marcar button:hover{border-color:var(--ambar);color:var(--ambar)}
+
+/* checklist */
+.check label{display:flex;gap:10px;align-items:flex-start;background:rgba(3,16,28,.5);
+  border:1px solid var(--linha);border-radius:11px;padding:10px 13px;margin-bottom:8px;cursor:pointer;font-size:.94rem;color:#d6ecf7}
+.check label:hover{border-color:var(--bio2)}
+.check input{margin-top:4px;accent-color:var(--bio)}
+.check label.ok{border-color:var(--verde);background:rgba(61,220,132,.09)}
+.check label.ok span{text-decoration:line-through;opacity:.75}
+
+.proximo{margin:30px 0 20px;text-align:center;
+  background:linear-gradient(135deg, rgba(15,185,163,.15), rgba(63,227,201,.05));
+  border:1px solid var(--bio2);border-radius:16px;padding:24px 18px}
+.proximo p{color:var(--suave);margin-bottom:12px;font-size:.95rem}
+.proximo a{display:inline-block;background:var(--bio);color:var(--abismo);text-decoration:none;
+  font-weight:800;padding:13px 26px;border-radius:11px}
+.proximo a:hover{background:#6ff0dc}
+footer.rodape{text-align:center;color:var(--cinza);font-size:.8rem;padding:18px 0 8px}
+
+.painel{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(4,20,34,.97);
+  border-top:1px solid var(--linha);padding:9px 18px;display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:.84rem}
+.painel .status{color:var(--suave);flex:1 1 190px;min-width:150px}
+.painel .status b{color:var(--bio)}
+.painel button{background:var(--card2);color:var(--texto);border:1px solid var(--linha);
+  padding:7px 12px;border-radius:9px;cursor:pointer;font-size:.84rem;font-weight:600}
+.painel button:hover{border-color:var(--bio);color:var(--bio)}
+.painel button.perigo:hover{border-color:var(--coral);color:var(--coral)}
+
+.velo{display:none;position:fixed;inset:0;z-index:100;background:rgba(2,10,18,.82);align-items:center;justify-content:center;padding:20px}
+.velo.on{display:flex}
+.modal{background:var(--card);border:1px solid var(--bio2);border-radius:16px;padding:24px;max-width:420px;width:100%}
+.modal h3{color:var(--bio);margin-bottom:10px;font-size:1.15rem}
+.modal p{color:#cfe8f4;font-size:.95rem;margin-bottom:18px}
+.modal .btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.modal button{padding:9px 16px;border-radius:9px;cursor:pointer;font-weight:700;font-size:.9rem;
+  border:1px solid var(--linha);background:var(--card2);color:var(--texto)}
+.modal button.ok{background:var(--coral);border-color:var(--coral);color:#2a0b06}
+.modal button.ok.calmo{background:var(--bio);border-color:var(--bio);color:var(--abismo)}
+
+@media (max-width:600px){h1{font-size:1.6rem}.cartao{padding:17px 15px}}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <span class="selo">Ciências &middot; 7º ano &middot; Avaliação mensal 1</span>
+    <h1>Resumo — <span>tudo em uma tela</span></h1>
+    <p class="sub">Mapas, tabelas, flashcards e checklist final &middot; capítulos 11 e 12</p>
+  </div>
+</header>
+
+<nav class="abas">
+  <div class="wrap">
+    <a href="index.html">🏠 Início</a>
+    <a href="leitura.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a href="resumo.html" class="atual">🗺️ Resumo</a>
+    <a href="simulado.html">📝 Simulado</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<div class="cartao">
+  <h2>🧬 O mapa do filo</h2>
+  <div class="mapa">
+    <span class="no raiz">CORDADOS</span>
+    <span class="seta">→</span>
+    <span class="no">Protocordados</span>
+    <span class="seta">→</span>
+    <span class="no alt">Urocordados · ascídia</span>
+    <span class="no alt">Cefalocordados · anfioxo</span>
+  </div>
+  <div class="mapa">
+    <span class="no raiz">CORDADOS</span>
+    <span class="seta">→</span>
+    <span class="no">Vertebrados</span>
+    <span class="seta">→</span>
+    <span class="no alt">Ágnatos · ciclóstomos</span>
+    <span class="no alt">Gnatostomados · peixes, anfíbios, répteis, aves, mamíferos</span>
+  </div>
+  <h3>Características exclusivas do embrião de todo cordado</h3>
+  <div class="grade">
+    <div class="mini"><b>Notocorda</b><span>Bastão fino de sustentação. Em alguns é parcialmente substituída pelas vértebras. Presente em pelo menos uma fase da vida.</span></div>
+    <div class="mini"><b>Tubo nervoso dorsal</b><span>Origina o sistema nervoso dos cordados.</span></div>
+    <div class="mini"><b>Fendas faringianas</b><span>Persistem nos aquáticos adultos como brânquias; nos terrestres se fecham.</span></div>
+    <div class="mini"><b>Cauda pós-anal</b><span>Quando persiste no adulto, auxilia na locomoção e no equilíbrio.</span></div>
+  </div>
+</div>
+
+<div class="cartao">
+  <h2>🐚 Protocordados</h2>
+  <p>Animais <strong>marinhos, de pequeno porte</strong>, <strong>sem vértebras e sem crânio</strong>, mas com notocorda ao menos na fase larval. Reprodução sexuada com <strong>fecundação externa</strong>, podendo passar por fase larval.</p>
+  <div class="tabela-rolagem">
+  <table>
+    <tr><th></th><th>Urocordados</th><th>Cefalocordados</th></tr>
+    <tr><td>Notocorda</td><td>restrita à cauda, só na fase larval</td><td>da cabeça à cauda, por toda a vida</td></tr>
+    <tr><td>Exemplo</td><td>ascídia — séssil, filtra a água</td><td>anfioxo — até 5 cm, enterrado na areia, filtrador</td></tr>
+    <tr><td>Detalhe</td><td>fica fixa em um lugar</td><td>modelo de estudo da evolução dos cordados e do cérebro</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="cartao">
+  <h2>🦴 Vertebrados</h2>
+  <ul class="lista">
+    <li>Surgiram no <strong>Cambriano</strong>, há <strong>meio bilhão de anos</strong>.</li>
+    <li>Mais de <strong>55 mil espécies</strong> (insetos: mais de 1 milhão) — mas são o grupo de <strong>maior volume</strong> a habitar a Terra.</li>
+    <li><strong>Exclusivo:</strong> vértebras e crânio.</li>
+    <li><strong>Esqueleto interno</strong> ósseo (células vivas + parte inorgânica que dá rigidez) ou cartilaginoso. Serve para sustentação, proteção dos órgãos e locomoção.</li>
+    <li><strong>Crânio:</strong> caixa óssea ou cartilaginosa que envolve o encéfalo (do qual o cérebro faz parte).</li>
+    <li><strong>Coluna vertebral:</strong> vértebras que protegem a medula espinal; sustentação e equilíbrio. Regiões cervical, torácica e lombar + osso sacro. Parte da notocorda vira os <strong>discos intervertebrais</strong>.</li>
+    <li><strong>Cartilagem:</strong> tecido forte e resistente, porém flexível (orelhas, ponta do nariz, discos intervertebrais).</li>
+    <li>Sistema digestório completo (boca e ânus), circulatório <strong>fechado</strong>, nervoso dorsal e bem desenvolvido.</li>
+    <li>Reprodução sexuada, fecundação interna ou externa; maioria com sexos separados, mas há <strong>hermafroditas</strong>.</li>
+  </ul>
+  <h3>Ágnatos × Gnatostomados — o critério é a mandíbula</h3>
+  <div class="tabela-rolagem">
+  <table>
+    <tr><th></th><th>Ágnatos</th><th>Gnatostomados</th></tr>
+    <tr><td>Mandíbula</td><td><b>não</b> têm (do grego <i>a</i> = ausência + <i>gnatha</i> = mandíbula)</td><td><b>têm</b> — estrutura móvel e articulada, ajuda na mordida e mastigação</td></tr>
+    <tr><td>Quem são</td><td>ciclóstomos: lampreia e peixe-bruxa</td><td>peixes, anfíbios, répteis, aves e mamíferos</td></tr>
+    <tr><td>Corpo</td><td>cilíndrico e alongado, boca circular com dentes de fixação; esqueleto cartilaginoso; coluna vertebral <b>incompleta</b>; vertebrados mais antigos evolutivamente; muitos são parasitas</td><td>variado; coluna vertebral completa nos peixes em diante</td></tr>
+  </table>
+  </div>
+  <div class="alerta"><b>Não caia nessa:</b> lampreia e peixe-bruxa <b>não</b> são peixes. São ciclóstomos, ou seja, ágnatos.</div>
+</div>
+
+<div class="cartao">
+  <h2>📊 A tabela dos cinco grupos</h2>
+  <div class="tabela-rolagem">
+  <table>
+    <tr><th></th><th>Peixes</th><th>Anfíbios</th><th>Répteis</th><th>Aves</th><th>Mamíferos</th></tr>
+    <tr><td>Coração</td><td>2 cavidades<br>1 átrio + 1 ventrículo</td><td>3 cavidades<br>2 átrios + 1 ventrículo</td><td>3 cavidades<br>2 átrios + 1 ventrículo parcialmente separado<br><b>exceção: crocodilianos, 4</b></td><td>4 cavidades<br>2 átrios + 2 ventrículos totalmente separados</td><td>4 cavidades<br>2 átrios + 2 ventrículos totalmente separados</td></tr>
+    <tr><td>Respiração</td><td>branquial; pulmonar (alguns)</td><td>branquial (larva e alguns adultos); pulmonar e cutânea (maioria dos adultos)</td><td>pulmonar</td><td>pulmonar (sacos aéreos)</td><td>pulmonar (alvéolos)</td></tr>
+    <tr><td>Temperatura</td><td>ectotérmico</td><td>ectotérmico</td><td>ectotérmico</td><td><b>endotérmico</b></td><td><b>endotérmico</b></td></tr>
+    <tr><td>Digestório</td><td>completo: boca e <b>ânus</b> (ósseos) ou <b>cloaca</b> (cartilaginosos)</td><td>completo: boca e cloaca</td><td>completo: boca e cloaca</td><td>completo: boca e cloaca</td><td>completo: boca e <b>ânus</b></td></tr>
+    <tr><td>Reprodução</td><td>fecundação interna e externa; desenvolvimento direto e indireto; ovíparos (maioria), ovovivíparos (algumas espécies de tubarão), vivíparos (alguns cartilaginosos e certos peixes menores)</td><td>fecundação interna (salamandras e cecílias) e externa (sapos e rãs); desenvolvimento indireto; ovíparos</td><td>fecundação interna; desenvolvimento direto; ovíparos, ovovivíparos e vivíparos</td><td>fecundação interna; desenvolvimento direto; ovíparos</td><td>fecundação interna; desenvolvimento direto; vivíparos (maioria)</td></tr>
+  </table>
+  </div>
+  <div class="dica"><b>Três ganchos de memória:</b> as cavidades do coração seguem <b>2 → 3 → 3 → 4 → 4</b>, na ordem da evolução; só <b>aves e mamíferos</b> são endotérmicos; só <b>peixes ósseos e mamíferos</b> terminam em ânus (o resto termina em cloaca).</div>
+  <div class="grade">
+    <div class="mini"><b>Ectotérmico</b><span>Usa fonte externa de calor (o Sol) para regular a temperatura. Peixes, anfíbios e répteis.</span></div>
+    <div class="mini"><b>Endotérmico</b><span>Produz calor por reações químicas no próprio organismo. Aves e mamíferos.</span></div>
+    <div class="mini"><b>Cloaca</b><span>Orifício comum aos sistemas excretor, digestório e reprodutivo.</span></div>
+    <div class="mini"><b>Ordem da evolução</b><span>Peixes → anfíbios → répteis → aves → mamíferos. A vida começou na água; os anfíbios são a transição para a terra.</span></div>
+  </div>
+</div>
+
+<div class="cartao">
+  <h2>🐟 Peixes — o essencial</h2>
+  <ul class="lista">
+    <li><strong>Primeiros animais com mandíbula</strong> → grupo mais antigo dos gnatostomados. <strong>Coluna vertebral completa.</strong></li>
+    <li><strong>Ectotérmicos</strong>, marinhos e de água doce, de poucos centímetros (manjubinha) a 20 metros (tubarão-baleia).</li>
+    <li><strong>Alimentação:</strong> carnívoros, herbívoros, onívoros ou filtradores (plâncton).</li>
+    <li><strong>Digestório completo:</strong> boca → cloaca (cartilaginosos) ou ânus (ósseos).</li>
+    <li><strong>Respiração branquial:</strong> a água entra pela boca em fluxo contínuo e passa pelas brânquias, onde o O₂ é absorvido e o CO₂ eliminado.</li>
+    <li><strong>Pulmonados:</strong> além das brânquias, têm estruturas semelhantes a pulmões. Podem se enterrar na areia e entrar em <strong>dormência</strong> na seca. Exemplo brasileiro: <strong>piramboia</strong> (Amazônia).</li>
+    <li><strong>Circulação fechada</strong>, coração com <strong>2 cavidades</strong> (1 átrio + 1 ventrículo); o sangue é oxigenado nas brânquias.</li>
+  </ul>
+  <h3>Sentidos</h3>
+  <div class="grade">
+    <div class="mini"><b>Linha lateral</b><span>Escamas porosas que captam vibrações da água e alterações de pressão e temperatura. Ajuda na caça e na fuga.</span></div>
+    <div class="mini"><b>Barbilhões</b><span>"Bigodes" que percebem sensações gustativas e táteis. Exemplo: pirarara.</span></div>
+    <div class="mini"><b>Ampolas de Lorenzini</b><span>Só nos cartilaginosos. Percebem correntes elétricas da musculatura de outros animais.</span></div>
+    <div class="mini"><b>Química</b><span>Receptores nas narinas e na boca percebem partículas dissolvidas na água.</span></div>
+  </div>
+  <h3>Reprodução</h3>
+  <ul class="lista">
+    <li>Sexuada, em geral com <strong>sexos separados</strong>; fecundação <strong>externa na maioria</strong>.</li>
+    <li>Alguns <strong>cartilaginosos</strong> têm fecundação <strong>interna</strong>, com uma estrutura chamada <strong>clásper</strong> nos machos.</li>
+    <li>Desenvolvimento <strong>direto ou indireto</strong>; no indireto surgem larvas chamadas <strong>alevinos</strong>.</li>
+    <li><strong>Piracema:</strong> nas chuvas de verão, peixes nadam contra a correnteza rio acima até as nascentes; perdem gordura, produzem hormônios que amadurecem as glândulas sexuais e liberam os gametas na água.</li>
+    <li><strong>Cavalo-marinho:</strong> a fêmea deposita os óvulos na bolsa do abdome do <strong>macho</strong>, que carrega os ovos.</li>
+  </ul>
+  <h3>Adaptações ao nado</h3>
+  <div class="grade">
+    <div class="mini"><b>Hidrodinâmica</b><span>Formato que ajuda a passagem da água, diminuindo a resistência durante o nado.</span></div>
+    <div class="mini"><b>Escamas + muco</b><span>Escamas sobrepostas como telhas e muco escorregadio diminuem o atrito com a água.</span></div>
+    <div class="mini"><b>Nadadeiras (5 tipos)</b><span>Caudal, pélvica, dorsal, peitoral e lateral. Estabilizam o corpo e deslocam a água. Podem estar fundidas, modificadas ou ausentes.</span></div>
+    <div class="mini"><b>Bexiga natatória</b><span>Só nos ósseos. Órgão elástico que armazena gás e garante flutuabilidade neutra e posição vertical.</span></div>
+  </div>
+  <div class="dica"><b>Bexiga natatória, o vaivém:</b> descendo, a pressão aumenta e o volume da bexiga diminui → o peixe <b>secreta gás dentro</b> dela. Subindo, a pressão diminui e a bexiga expande → o peixe <b>retira gás</b>.</div>
+</div>
+
+<div class="cartao">
+  <h2>🦈 Cartilaginosos × Ósseos</h2>
+  <div class="tabela-rolagem">
+  <table>
+    <tr><th></th><th>Cartilaginosos (condrictes)</th><th>Ósseos (osteíctes)</th></tr>
+    <tr><td>Esqueleto</td><td>cartilaginoso</td><td>ósseo</td></tr>
+    <tr><td>Ambiente</td><td>principalmente marinho</td><td>água doce e salgada</td></tr>
+    <tr><td>Escamas</td><td><b>placoides</b> — em formato de placas, com composição semelhante à dos dentes: esmalte por fora, dentina na parte interna</td><td>dérmicas</td></tr>
+    <tr><td>Brânquias</td><td>5 a 7 pares de fendas <b>expostas</b>, laterais na cabeça</td><td>cobertas pelo <b>opérculo</b>, que protege e ajuda no bombeamento de água</td></tr>
+    <tr><td>Boca</td><td><b>ventral</b>, com várias filas de dentes pontiagudos; corpo fusiforme</td><td><b>terminal ou frontal</b></td></tr>
+    <tr><td>Saídas</td><td>anal, genital e urinário se unem na <b>cloaca</b></td><td>anal e urogenital <b>independentes</b>; maioria tem bexiga urinária</td></tr>
+    <tr><td>Bexiga natatória</td><td>não têm</td><td><b>têm</b> — exclusividade do grupo</td></tr>
+    <tr><td>Sentidos</td><td>olfato e visão bem desenvolvidos; linha lateral sensível à pressão; <b>ampolas de Lorenzini</b></td><td>visão, audição e olfato razoavelmente desenvolvidos, variando com a espécie</td></tr>
+    <tr><td>Reprodução</td><td>sexos separados; fecundação <b>interna</b> (clásper); desenvolvimento <b>direto</b>; ovíparos, vivíparos ou ovovivíparos</td><td>separação de sexo, muitos com <b>dimorfismo sexual</b>; fecundação <b>externa</b> na maioria</td></tr>
+    <tr><td>Exemplos</td><td>tubarões (cações), quimeras, arraias</td><td>piranhas, lambaris, baiacus, cavalos-marinhos, garoupas, pirarucus</td></tr>
+  </table>
+  </div>
+  <div class="alerta"><b>Fica a reflexão:</b> a pesca predatória dos cartilaginosos é grave para o ecossistema marinho — eles são essenciais no equilíbrio das cadeias alimentares. Boa parte do que é vendido como "cação" é, na verdade, tubarão.</div>
+  <div class="grade">
+    <div class="mini"><b>Peixes abissais</b><span>Vivem nas grandes profundidades; resistem à alta pressão, à baixa temperatura e à pouca comida. Alguns têm bioluminescência para atrair presas — como o peixe-diabo-negro.</span></div>
+    <div class="mini"><b>Baiacu</b><span>Engole água, infla até 3× o tamanho e assume forma esférica: estratégia de defesa.</span></div>
+  </div>
+</div>
+
+<div class="cartao">
+  <h2>🐸 Anfíbios — o começo do próximo bloco</h2>
+  <ul class="lista">
+    <li><strong>Primeiros vertebrados a alcançar o ambiente terrestre</strong>, mas ainda dependentes da água para reprodução, desenvolvimento até a fase adulta e hidratação da pele.</li>
+    <li>Pele <strong>fina, com pouca queratina</strong> → permeável, perde água. Recoberta por <strong>muco</strong>. Vivem em ambientes úmidos.</li>
+    <li>São <strong>ectotérmicos</strong>.</li>
+    <li><strong>Anfíbio</strong>, do grego: <i>amphi</i> = "dos dois lados" + <i>bios</i> = "vida" → vida dupla.</li>
+    <li><strong>Queratina:</strong> proteína que impermeabiliza e protege contra a dessecação; forma unhas, pelos, cabelos, penas e alguns tipos de escamas.</li>
+  </ul>
+</div>
+
+<div class="cartao">
+  <h2>⚡ Flashcards — clique para virar</h2>
+  <p>Passe por todos. Marque com ⭐ os que você errou para revisar de novo antes da prova.</p>
+  <div class="cards" id="cards"></div>
+</div>
+
+<div class="cartao">
+  <h2>✅ Checklist antes da prova</h2>
+  <p>Só marque quando conseguir explicar em voz alta, sem olhar.</p>
+  <div class="check" id="check"></div>
+</div>
+
+<div class="proximo">
+  <p>Lacunas fechadas? Hora de enfrentar a prova de mentirinha.</p>
+  <a href="simulado.html">📝 Ir para o Simulado →</a>
+</div>
+
+<footer class="rodape">Material de estudo para jovem aprendiz &middot; Ciências 7º ano &middot; Capítulos 11 e 12</footer>
+</main>
+
+<div class="painel">
+  <div class="status" id="status">Seu progresso é salvo sozinho.</div>
+  <button type="button" id="btExportar">📥 Exportar</button>
+  <button type="button" id="btImportar">📤 Importar</button>
+  <button type="button" class="perigo" id="btZerar">🗑️ Zerar tudo</button>
+  <input type="file" id="arquivo" accept=".json" style="display:none">
+</div>
+
+<div class="velo" id="velo">
+  <div class="modal">
+    <h3 id="mdTitulo">Confirmar</h3>
+    <p id="mdTexto">...</p>
+    <div class="btns">
+      <button type="button" id="mdCancelar">Cancelar</button>
+      <button type="button" class="ok" id="mdOk">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var FLASH = [
+    ["Notocorda","Bastão fino presente em pelo menos uma fase da vida de todo cordado. Dá sustentação e, em alguns grupos, é parcialmente substituída pelas vértebras."],
+    ["Tubo nervoso dorsal","Estrutura do embrião dos cordados que origina o sistema nervoso."],
+    ["Fendas faringianas","Persistem nos cordados aquáticos adultos formando as brânquias; nos terrestres se fecham."],
+    ["Cauda pós-anal","Quando persiste na fase adulta, auxilia na locomoção e no equilíbrio."],
+    ["Urocordado","Notocorda restrita à cauda e só na fase larval. Exemplo: ascídia, animal séssil que filtra a água."],
+    ["Cefalocordado","Notocorda da cabeça à cauda, por toda a vida. Exemplo: anfioxo, de até 5 cm."],
+    ["Exclusivo dos vertebrados","Vértebras e crânio."],
+    ["Cartilagem","Tecido forte e resistente, porém flexível. Orelhas, ponta do nariz e discos intervertebrais."],
+    ["Ágnato","Vertebrado sem mandíbula (do grego a = ausência, gnatha = mandíbula). Representados pelos ciclóstomos."],
+    ["Ciclóstomos","Lampreia e peixe-bruxa. Vertebrados mais antigos; boca circular, esqueleto cartilaginoso, coluna vertebral incompleta; muitos parasitas."],
+    ["Ectotérmico","Usa fonte externa de calor, como o Sol, para regular a temperatura. Peixes, anfíbios e répteis."],
+    ["Endotérmico","Produz calor por reações químicas no próprio organismo. Aves e mamíferos."],
+    ["Cloaca","Orifício comum aos sistemas excretor, digestório e reprodutivo."],
+    ["Coração dos peixes","2 cavidades: 1 átrio e 1 ventrículo."],
+    ["Coração dos répteis","3 cavidades, com o ventrículo parcialmente separado. Exceção: crocodilianos, com 4."],
+    ["Ordem da evolução","Peixes → anfíbios → répteis → aves → mamíferos."],
+    ["Peixes: novidade evolutiva","Foram os primeiros animais com mandíbula e têm coluna vertebral completa."],
+    ["Peixe pulmonado","Além das brânquias, tem estruturas semelhantes a pulmões. Pode entrar em dormência na seca. Exemplo: piramboia."],
+    ["Linha lateral","Escamas porosas que captam vibrações e alterações de pressão e temperatura da água."],
+    ["Ampolas de Lorenzini","Nos cartilaginosos: percebem correntes elétricas vindas da musculatura de outros animais."],
+    ["Clásper","Estrutura dos machos de alguns peixes cartilaginosos, usada na cópula (fecundação interna)."],
+    ["Alevinos","Larvas produzidas no desenvolvimento indireto dos peixes."],
+    ["Piracema","Peixes nadam contra a correnteza rio acima até as nascentes, onde liberam os gametas."],
+    ["Hidrodinâmica","Formato que ajuda a passagem da água pelo corpo, diminuindo a resistência durante o nado."],
+    ["Bexiga natatória","Órgão elástico que armazena gás; garante flutuabilidade neutra. Exclusiva dos peixes ósseos."],
+    ["Escamas placoides","Escamas dos cartilaginosos, em formato de placas, com esmalte por fora e dentina por dentro — como dentes."],
+    ["Opérculo","Estrutura dos peixes ósseos que cobre as brânquias e auxilia no bombeamento de água."],
+    ["Boca ventral × terminal","Ventral (embaixo) nos cartilaginosos; terminal ou frontal nos ósseos."],
+    ["Dimorfismo sexual","Macho diferente da fêmea. Comum entre os peixes ósseos, como os lebistes."],
+    ["Peixes abissais","Vivem nas grandes profundidades; alguns usam bioluminescência para atrair presas, como o peixe-diabo-negro."],
+    ["Queratina","Proteína que impermeabiliza a pele e protege contra a dessecação. Forma unhas, pelos, cabelos, penas e escamas."],
+    ["Anfíbio","Do grego amphi = dos dois lados e bios = vida. Pele fina, pouca queratina, dependente de ambiente úmido."]
+  ];
+
+  var CHECK = [
+    "Explico o que é notocorda e por que ela define os cordados.",
+    "Cito as três estruturas exclusivas do embrião dos cordados e a função de cada uma.",
+    "Diferencio urocordado de cefalocordado e dou um exemplo de cada.",
+    "Digo quais são as duas estruturas exclusivas dos vertebrados.",
+    "Explico o critério que separa ágnatos de gnatostomados e dou exemplos.",
+    "Descrevo os ciclóstomos: boca, esqueleto e coluna vertebral.",
+    "Diferencio ectotérmico de endotérmico e digo quais grupos são cada um.",
+    "Reconstruo a linha do coração da tabela: 2, 3, 3, 4, 4 — e lembro da exceção dos crocodilianos.",
+    "Digo quais grupos terminam em cloaca e quais terminam em ânus.",
+    "Recito a sequência de evolução dos vertebrados.",
+    "Explico por que os peixes são o grupo mais antigo dos gnatostomados.",
+    "Descrevo a respiração branquial e explico o que é um peixe pulmonado.",
+    "Explico o que faz a linha lateral e o que fazem as ampolas de Lorenzini.",
+    "Explico como funciona a bexiga natatória ao descer e ao subir.",
+    "Comparo cartilaginosos e ósseos em: escamas, brânquias, boca, saída e fecundação.",
+    "Explico o que é piracema e o que são alevinos.",
+    "Digo por que a pele do anfíbio exige ambiente úmido."
+  ];
+
+  var CHAVE = "ccf_cien7_cap11_12_resumo_v1";
+  var memoria = null;
+  function ler(){
+    try{ var s = localStorage.getItem(CHAVE); return s ? JSON.parse(s) : null; }
+    catch(e){ return memoria; }
+  }
+  function gravar(o){ memoria = o; try{ localStorage.setItem(CHAVE, JSON.stringify(o)); }catch(e){} }
+
+  var estado = ler() || {marcados:{}, feitos:{}, salvoEm:null};
+  if(!estado.marcados) estado.marcados = {};
+  if(!estado.feitos) estado.feitos = {};
+
+  var cards = document.getElementById("cards");
+  FLASH.forEach(function(f, i){
+    var d = document.createElement("div");
+    d.className = "card";
+    d.setAttribute("data-i", i);
+    if(estado.marcados["f"+i]) d.classList.add("marcado");
+    d.innerHTML = '<div class="frente">'+f[0]+'</div>'
+                + '<div class="verso">'+f[1]
+                + '<div class="marcar"><button type="button" data-marca="'+i+'">'
+                + (estado.marcados["f"+i] ? "⭐ marcado para revisar" : "☆ marcar para revisar")
+                + '</button></div></div>'
+                + '<div class="toque">toque para ver</div>';
+    cards.appendChild(d);
+  });
+  cards.addEventListener("click", function(e){
+    var bt = e.target.closest ? e.target.closest("button[data-marca]") : null;
+    if(bt){
+      e.stopPropagation();
+      var k = "f"+bt.getAttribute("data-marca");
+      estado.marcados[k] = !estado.marcados[k];
+      bt.textContent = estado.marcados[k] ? "⭐ marcado para revisar" : "☆ marcar para revisar";
+      bt.closest(".card").classList.toggle("marcado", !!estado.marcados[k]);
+      estado.salvoEm = new Date().toISOString();
+      gravar(estado); atualizar();
+      return;
+    }
+    var c = e.target.closest ? e.target.closest(".card") : null;
+    if(c) c.classList.toggle("virado");
+  });
+
+  var check = document.getElementById("check");
+  CHECK.forEach(function(t, i){
+    var lab = document.createElement("label");
+    var marcado = !!estado.feitos["c"+i];
+    if(marcado) lab.className = "ok";
+    lab.innerHTML = '<input type="checkbox" data-i="'+i+'"'+(marcado?" checked":"")+'><span>'+t+'</span>';
+    check.appendChild(lab);
+  });
+  check.addEventListener("change", function(e){
+    if(e.target && e.target.type === "checkbox"){
+      var i = e.target.getAttribute("data-i");
+      estado.feitos["c"+i] = e.target.checked;
+      e.target.parentNode.classList.toggle("ok", e.target.checked);
+      estado.salvoEm = new Date().toISOString();
+      gravar(estado); atualizar();
+    }
+  });
+
+  function atualizar(){
+    var f = 0, m = 0;
+    for(var k in estado.feitos){ if(estado.feitos[k]) f++; }
+    for(var j in estado.marcados){ if(estado.marcados[j]) m++; }
+    var el = document.getElementById("status");
+    if(estado.salvoEm){
+      var d = new Date(estado.salvoEm);
+      var fmt = ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear()
+              +" às "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+      el.innerHTML = "✅ checklist <b>"+f+"/"+CHECK.length+"</b> &middot; <b>"+m+"</b> card(s) para revisar &middot; salvo em "+fmt;
+    }else{
+      el.textContent = "Seu progresso é salvo sozinho.";
+    }
+  }
+  atualizar();
+
+  var velo = document.getElementById("velo");
+  var acao = null;
+  function abrirModal(t, x, rot, calmo, fn){
+    document.getElementById("mdTitulo").textContent = t;
+    document.getElementById("mdTexto").textContent = x;
+    var ok = document.getElementById("mdOk");
+    ok.textContent = rot; ok.className = calmo ? "ok calmo" : "ok";
+    document.getElementById("mdCancelar").style.display = fn ? "" : "none";
+    acao = fn; velo.classList.add("on");
+  }
+  function fechar(){ velo.classList.remove("on"); acao = null; }
+  document.getElementById("mdCancelar").addEventListener("click", fechar);
+  document.getElementById("mdOk").addEventListener("click", function(){ var f = acao; fechar(); if(f) f(); });
+  velo.addEventListener("click", function(e){ if(e.target === velo) fechar(); });
+
+  document.getElementById("btExportar").addEventListener("click", function(){
+    var blob = new Blob([JSON.stringify(estado, null, 2)], {type:"application/json"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "resumo-cordados.json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
+  });
+  var arq = document.getElementById("arquivo");
+  document.getElementById("btImportar").addEventListener("click", function(){ arq.click(); });
+  arq.addEventListener("change", function(){
+    var fl = arq.files && arq.files[0];
+    if(!fl) return;
+    var r = new FileReader();
+    r.onload = function(){
+      try{
+        var o = JSON.parse(r.result);
+        if(!o || typeof o !== "object") throw new Error("formato");
+        gravar({marcados:o.marcados||{}, feitos:o.feitos||{}, salvoEm:new Date().toISOString()});
+        abrirModal("Pronto", "Progresso importado. A página vai recarregar.", "Fechar", true, null);
+        setTimeout(function(){ location.reload(); }, 900);
+      }catch(e){
+        abrirModal("Não deu certo", "O arquivo escolhido não parece ser um backup deste Resumo.", "Fechar", true, null);
+      }
+      arq.value = "";
+    };
+    r.readAsText(fl);
+  });
+  document.getElementById("btZerar").addEventListener("click", function(){
+    abrirModal("Apagar tudo?", "As marcações dos flashcards e do checklist serão apagadas.", "Apagar", false, function(){
+      try{ localStorage.removeItem(CHAVE); }catch(e){}
+      memoria = null; location.reload();
+    });
+  });
+})();
+</script>
+</body>
+</html>
