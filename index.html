@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit de Estudo &middot; Ciências 7º ano &middot; Cordados e Peixes</title>
+<style>
+:root{
+  --abismo:#03101c; --fundo:#06182a; --card:#0c2637; --card2:#113347;
+  --linha:#1d5570; --texto:#e2f3fb; --suave:#9dc3d8;
+  --bio:#3fe3c9; --bio2:#0fb9a3; --ambar:#ffc14d; --coral:#ff8172;
+  --verde:#3ddc84; --cinza:#7a93a6; --roxo:#a98cff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1200px 700px at 20% -15%, #0e4058 0%, transparent 60%),
+    radial-gradient(900px 500px at 88% 8%, #10304a 0%, transparent 55%),
+    linear-gradient(180deg,#06182a 0%, #03101c 100%);
+  background-attachment:fixed;
+  color:var(--texto); font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  line-height:1.62; min-height:100vh;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px}
+
+header.capa{padding:60px 0 44px;position:relative;overflow:hidden}
+header.capa::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(500px 180px at 70% 110%, rgba(63,227,201,.20), transparent 70%);
+}
+.selo{display:inline-block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--abismo);background:var(--bio);padding:6px 14px;border-radius:20px;font-weight:800}
+h1{font-size:2.7rem;margin:16px 0 8px;line-height:1.08;letter-spacing:-1px}
+h1 span{color:var(--bio)}
+.linha-fina{color:var(--suave);font-size:1.05rem;max-width:640px}
+.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.tag{background:rgba(17,51,71,.8);border:1px solid var(--linha);color:var(--suave);
+  padding:6px 13px;border-radius:20px;font-size:.85rem;font-weight:600}
+.tag b{color:var(--bio)}
+
+section{margin-bottom:34px}
+h2.secao{font-size:1.3rem;color:var(--bio);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+
+.trilha{display:grid;gap:14px}
+a.item{
+  display:flex;gap:16px;align-items:flex-start;text-decoration:none;
+  background:linear-gradient(120deg, rgba(17,51,71,.62), rgba(12,38,55,.8));
+  border:1px solid var(--linha);border-radius:16px;padding:20px;
+  transition:transform .14s, border-color .14s, box-shadow .14s;
+}
+a.item:hover{transform:translateY(-3px);border-color:var(--bio);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.icone{font-size:1.9rem;line-height:1;flex:0 0 auto;width:56px;height:56px;border-radius:15px;
+  display:flex;align-items:center;justify-content:center;background:rgba(3,16,28,.65);border:1px solid var(--bio2)}
+.corpo{flex:1;min-width:0}
+.corpo .passo{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bio2);font-weight:800}
+.corpo h3{font-size:1.2rem;color:#fff;margin:2px 0 5px}
+.corpo p{color:#c9e3f0;font-size:.94rem}
+.corpo .tempo{color:var(--cinza);font-size:.83rem;margin-top:7px}
+a.item.amarelo .icone{border-color:var(--ambar)}
+a.item.amarelo:hover{border-color:var(--ambar);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+a.item.amarelo .corpo .passo{color:var(--ambar)}
+
+.aviso{background:linear-gradient(180deg, rgba(17,51,71,.5), rgba(12,38,55,.72));
+  border:1px solid var(--linha);border-radius:16px;padding:20px 22px}
+.aviso h3{color:var(--ambar);font-size:1.05rem;margin-bottom:9px}
+.aviso ol{margin-left:20px;color:#d6ecf7;font-size:.95rem}
+.aviso ol li{margin-bottom:7px}
+.aviso p{color:#cfe8f4;font-size:.94rem;margin-top:10px}
+.aviso b{color:#fff}
+
+.escopo{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.bloco{background:rgba(3,16,28,.55);border:1px solid var(--linha);border-radius:13px;padding:15px 17px}
+.bloco b{color:var(--bio);display:block;margin-bottom:6px;font-size:.96rem}
+.bloco ul{list-style:none;margin:0}
+.bloco li{padding-left:17px;position:relative;font-size:.9rem;color:#cfe8f4;margin-bottom:4px}
+.bloco li::before{content:"·";position:absolute;left:4px;color:var(--bio2);font-weight:900}
+
+.codigos{background:linear-gradient(135deg, rgba(255,193,77,.12), rgba(63,227,201,.05));
+  border:1px solid var(--ambar);border-radius:16px;padding:20px 22px}
+.codigos h3{color:var(--ambar);font-size:1.05rem;margin-bottom:8px}
+.codigos p{color:#d6ecf7;font-size:.94rem;margin-bottom:8px}
+.codigos code{background:var(--abismo);color:var(--bio);padding:3px 9px;border-radius:6px;
+  font-family:Consolas,monospace;font-weight:700}
+
+footer.rodape{text-align:center;color:var(--cinza);font-size:.82rem;padding:26px 0 34px;
+  border-top:1px solid var(--linha);margin-top:16px}
+
+@media (max-width:600px){
+  h1{font-size:2rem}
+  header.capa{padding:42px 0 30px}
+  a.item{padding:16px;gap:12px}
+  .icone{width:46px;height:46px;font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <div class="wrap">
+    <span class="selo">Ciências &middot; 7º ano A</span>
+    <h1>Kit de Estudo<br><span>Cordados e Peixes</span></h1>
+    <p class="linha-fina">Material completo para a <b>Avaliação mensal 1</b>: capítulo 11 (Conhecendo os cordados) e capítulo 12 (Peixes e anfíbios), até a página 28 do livro didático.</p>
+    <div class="meta">
+      <span class="tag">📚 <b>Capítulos 11 e 12</b></span>
+      <span class="tag">🧪 <b>4 materiais</b></span>
+      <span class="tag">🎯 <b>35 questões</b> com gabarito comentado</span>
+      <span class="tag">💾 salva sozinho</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <h2 class="secao">🧭 A trilha, na ordem certa</h2>
+  <div class="trilha">
+
+    <a class="item" href="leitura.html">
+      <div class="icone">📖</div>
+      <div class="corpo">
+        <div class="passo">Passo 1</div>
+        <h3>Leitura Guiada</h3>
+        <p>O conteúdo inteiro explicado em 12 blocos, com uma parada <b>"Pare e pense"</b> ao fim de cada um. É aqui que o assunto entra.</p>
+        <div class="tempo">⏱ cerca de 40 minutos</div>
+      </div>
+    </a>
+
+    <a class="item" href="quiz.html">
+      <div class="icone">🎯</div>
+      <div class="corpo">
+        <div class="passo">Passo 2</div>
+        <h3>Quiz</h3>
+        <p>15 questões logo depois da leitura, enquanto o assunto está fresco. Serve para descobrir onde ficou o buraco. Gabarito comentado em todas as alternativas.</p>
+        <div class="tempo">⏱ cerca de 20 minutos &middot; libera o código <b>MED-XX-YY</b></div>
+      </div>
+    </a>
+
+    <a class="item" href="resumo.html">
+      <div class="icone">🗺️</div>
+      <div class="corpo">
+        <div class="passo">Passo 3</div>
+        <h3>Resumo</h3>
+        <p>Mapas, a tabela dos cinco grupos, 32 flashcards para virar e um checklist final. Use para fechar exatamente as lacunas que o Quiz mostrou.</p>
+        <div class="tempo">⏱ cerca de 25 minutos</div>
+      </div>
+    </a>
+
+    <a class="item amarelo" href="simulado.html">
+      <div class="icone">📝</div>
+      <div class="corpo">
+        <div class="passo">Passo 4</div>
+        <h3>Simulado</h3>
+        <p>20 questões no estilo da avaliação, sem consulta e cronometrado. No fim, o material aponta quais assuntos ainda precisam de revisão.</p>
+        <div class="tempo">⏱ cerca de 40 minutos &middot; libera o código <b>SIM-XX-YY</b></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section>
+  <h2 class="secao">📌 Como usar este material</h2>
+  <div class="aviso">
+    <h3>A ordem importa</h3>
+    <ol>
+      <li><b>Leitura Guiada</b> — leia um bloco por vez e responda o "Pare e pense" antes de seguir. Escrever a resposta com as próprias palavras é o que faz o conteúdo fixar.</li>
+      <li><b>Quiz</b> — faça <b>logo depois</b> da leitura, sem consultar. Erros aqui são bons: eles mostram onde estudar.</li>
+      <li><b>Resumo</b> — vá direto aos assuntos que você errou no Quiz. Depois passe pelos flashcards e pelo checklist.</li>
+      <li><b>Simulado</b> — deixe para o final, de preferência num dia diferente, cronometrado e sem consultar nada.</li>
+    </ol>
+    <p><b>Tudo é salvo sozinho</b> no próprio navegador: dá para fechar e voltar depois que as respostas continuam lá. Cada material tem os botões <b>Exportar</b>, <b>Importar</b> e <b>Zerar tudo</b> na barra de baixo.</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="secao">📚 O que cai na prova</h2>
+  <div class="escopo">
+    <div class="bloco">
+      <b>Capítulo 11 — Conhecendo os cordados</b>
+      <ul>
+        <li>Notocorda e as estruturas exclusivas do embrião</li>
+        <li>Protocordados: urocordados e cefalocordados</li>
+        <li>Vertebrados: vértebras, crânio, esqueleto e coluna</li>
+        <li>Ágnatos × gnatostomados e os ciclóstomos</li>
+        <li>Ecto e endotérmicos, cloaca, reprodução</li>
+        <li>A tabela dos cinco grupos de vertebrados</li>
+        <li>A sequência de evolução dos vertebrados</li>
+      </ul>
+    </div>
+    <div class="bloco">
+      <b>Capítulo 12 — Peixes (até a p. 28)</b>
+      <ul>
+        <li>Peixes: os primeiros gnatostomados</li>
+        <li>Nutrição, respiração branquial e pulmonados</li>
+        <li>Circulação e coração de duas cavidades</li>
+        <li>Linha lateral, barbilhões e sentidos</li>
+        <li>Reprodução, clásper, alevinos e piracema</li>
+        <li>Hidrodinâmica, nadadeiras e bexiga natatória</li>
+        <li>Condrictes × osteíctes e peixes abissais</li>
+        <li>Anfíbios: características gerais (entrada do próximo bloco)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="secao">🔑 Códigos de liberação</h2>
+  <div class="codigos">
+    <h3>Para quem está acompanhando o estudo</h3>
+    <p>Ao terminar o <b>Quiz</b>, o material gera um código <code>MED-XX-YY</code>. Ao terminar o <b>Simulado</b>, gera um código <code>SIM-XX-YY</code>.</p>
+    <p>Os dois números do meio são a quantidade de acertos, e as duas letras finais são fixas para aquele aparelho. Basta mostrar o código — ele prova que o material foi feito até o fim e já diz como foi o desempenho.</p>
+  </div>
+</section>
+
+<footer class="rodape">
+  Material de estudo para jovem aprendiz &middot; Ciências &middot; 7º ano A &middot; Ensino Fundamental II<br>
+  Conteúdo baseado no livro didático — capítulos 11 e 12, Unidade 5: Reino Animalia: Cordados
+</footer>
+
+</main>
+</body>
+</html>
