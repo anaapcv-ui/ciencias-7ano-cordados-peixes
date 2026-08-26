@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado &middot; Cordados e Peixes</title>
+<style>
+:root{
+  --abismo:#03101c; --fundo:#06182a; --card:#0c2637; --card2:#113347;
+  --linha:#1d5570; --texto:#e2f3fb; --suave:#9dc3d8;
+  --bio:#3fe3c9; --bio2:#0fb9a3; --ambar:#ffc14d; --coral:#ff8172;
+  --verde:#3ddc84; --cinza:#7a93a6; --roxo:#a98cff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1100px 600px at 15% -10%, #0d3a52 0%, transparent 60%),
+    radial-gradient(900px 500px at 90% 5%, #10304a 0%, transparent 55%),
+    linear-gradient(180deg,#06182a 0%, #03101c 100%);
+  background-attachment:fixed;
+  color:var(--texto); font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  line-height:1.6; padding-bottom:70px;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+header.topo{background:linear-gradient(135deg,#062132 0%, #0a3b4f 55%, #0d5a5a 100%);
+  border-bottom:2px solid var(--ambar);padding:34px 0 26px}
+.selo{display:inline-block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--abismo);background:var(--ambar);padding:5px 12px;border-radius:20px;font-weight:700}
+h1{font-size:2.05rem;margin:12px 0 6px;line-height:1.15;letter-spacing:-.5px}
+h1 span{color:var(--ambar)}
+.sub{color:var(--suave);font-size:.98rem}
+
+nav.abas{position:sticky;top:0;z-index:40;background:rgba(4,20,34,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
+nav.abas .wrap{display:flex;gap:6px;overflow-x:auto;padding:9px 18px}
+nav.abas a{flex:0 0 auto;text-decoration:none;color:var(--suave);padding:8px 14px;border-radius:9px;
+  font-size:.9rem;font-weight:600;border:1px solid transparent;white-space:nowrap}
+nav.abas a:hover{background:var(--card);color:var(--texto)}
+nav.abas a.atual{background:var(--ambar);color:var(--abismo);border-color:var(--ambar)}
+
+main{padding-top:26px}
+.instru{background:linear-gradient(180deg, rgba(17,51,71,.55), rgba(12,38,55,.75));
+  border:1px solid var(--linha);border-radius:16px;padding:20px 22px;margin-bottom:22px}
+.instru h2{color:var(--ambar);font-size:1.15rem;margin-bottom:8px}
+.instru p{color:#d6ecf7;font-size:.95rem;margin-bottom:6px}
+.instru ul{margin:8px 0 4px 2px;list-style:none}
+.instru li{padding-left:20px;position:relative;margin-bottom:5px;color:#cfe8f4;font-size:.93rem}
+.instru li::before{content:"▸";position:absolute;left:0;color:var(--ambar);font-weight:800}
+
+.barra{height:9px;background:rgba(3,16,28,.7);border-radius:20px;overflow:hidden;margin:14px 0 6px;border:1px solid var(--linha)}
+.barra i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#c98d18,var(--ambar));transition:width .3s}
+.contagem{font-size:.85rem;color:var(--suave);text-align:right}
+
+.questao{background:linear-gradient(180deg, rgba(17,51,71,.5), rgba(12,38,55,.72));
+  border:1px solid var(--linha);border-radius:16px;padding:22px;margin-bottom:20px;
+  box-shadow:0 8px 26px rgba(0,0,0,.3)}
+.qtopo{display:flex;gap:11px;align-items:flex-start;margin-bottom:14px}
+.qnum{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;
+  border-radius:11px;background:var(--ambar);color:var(--abismo);font-weight:800;flex:0 0 auto}
+.qtexto{font-size:1.03rem;color:#eaf7fd;font-weight:600;line-height:1.45}
+.alts{display:flex;flex-direction:column;gap:9px}
+.alt{display:flex;gap:11px;align-items:flex-start;cursor:pointer;background:rgba(3,16,28,.5);
+  border:1px solid var(--linha);border-radius:11px;padding:11px 13px;font-size:.95rem;color:#d6ecf7;
+  transition:border-color .15s, background .15s}
+.alt:hover{border-color:var(--ambar)}
+.alt input{margin-top:4px;accent-color:var(--ambar);flex:0 0 auto}
+.alt .letra{font-weight:800;color:var(--ambar);flex:0 0 auto}
+.alt.sel{border-color:var(--ambar);background:rgba(255,193,77,.10)}
+.alt.certa{border-color:var(--verde);background:rgba(61,220,132,.13)}
+.alt.errada{border-color:#3c5060;background:rgba(120,140,155,.10);opacity:.85}
+.altbloco{display:flex;flex-direction:column;flex:1}
+.coment{display:none;margin-top:8px;font-size:.9rem;line-height:1.5;padding:9px 12px;border-radius:0 10px 10px 0}
+.mostrando .coment{display:block}
+.alt.certa .coment{background:rgba(61,220,132,.10);border-left:3px solid var(--verde);color:#c9f3dc}
+.alt.errada .coment{background:rgba(122,147,166,.10);border-left:3px solid var(--cinza);color:#c2d3de}
+
+.acoes{text-align:center;margin:26px 0}
+.acoes button{background:var(--ambar);color:var(--abismo);border:none;padding:14px 30px;border-radius:12px;
+  font-size:1.02rem;font-weight:800;cursor:pointer}
+.acoes button:hover{background:#ffd47d}
+.acoes button:disabled{background:var(--card2);color:var(--cinza);cursor:not-allowed}
+
+.resultado{display:none;margin:26px 0;text-align:center;
+  background:linear-gradient(135deg, rgba(255,193,77,.15), rgba(255,193,77,.04));
+  border:1px solid var(--ambar);border-radius:18px;padding:28px 20px}
+.resultado.on{display:block}
+.resultado .nota{font-size:2.6rem;font-weight:800;color:var(--ambar);line-height:1.1}
+.resultado .msg{color:#d6ecf7;margin:8px 0 16px;font-size:.98rem}
+.codigo{display:inline-block;background:var(--abismo);border:2px dashed var(--bio);
+  color:var(--bio);font-family:"Consolas",monospace;font-size:1.5rem;font-weight:800;
+  padding:12px 22px;border-radius:12px;letter-spacing:2px}
+.codigo-leg{color:var(--suave);font-size:.85rem;margin-top:10px}
+.revisar{margin-top:18px;text-align:left;background:rgba(3,16,28,.5);border:1px solid var(--linha);
+  border-radius:12px;padding:14px 16px}
+.revisar b{color:var(--ambar);display:block;margin-bottom:6px}
+.revisar span{font-size:.92rem;color:#cfe8f4}
+
+.proximo{margin:30px 0 20px;text-align:center;
+  background:linear-gradient(135deg, rgba(15,185,163,.15), rgba(63,227,201,.05));
+  border:1px solid var(--bio2);border-radius:16px;padding:24px 18px}
+.proximo p{color:var(--suave);margin-bottom:12px;font-size:.95rem}
+.proximo a{display:inline-block;background:var(--bio);color:var(--abismo);text-decoration:none;
+  font-weight:800;padding:13px 26px;border-radius:11px;margin:5px}
+.proximo a:hover{background:#6ff0dc}
+footer.rodape{text-align:center;color:var(--cinza);font-size:.8rem;padding:18px 0 8px}
+
+.painel{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(4,20,34,.97);
+  border-top:1px solid var(--linha);padding:9px 18px;display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:.84rem}
+.painel .status{color:var(--suave);flex:1 1 190px;min-width:150px}
+.painel .status b{color:var(--ambar)}
+.painel button{background:var(--card2);color:var(--texto);border:1px solid var(--linha);
+  padding:7px 12px;border-radius:9px;cursor:pointer;font-size:.84rem;font-weight:600}
+.painel button:hover{border-color:var(--ambar);color:var(--ambar)}
+.painel button.perigo:hover{border-color:var(--coral);color:var(--coral)}
+
+.velo{display:none;position:fixed;inset:0;z-index:100;background:rgba(2,10,18,.82);align-items:center;justify-content:center;padding:20px}
+.velo.on{display:flex}
+.modal{background:var(--card);border:1px solid var(--ambar);border-radius:16px;padding:24px;max-width:420px;width:100%}
+.modal h3{color:var(--ambar);margin-bottom:10px;font-size:1.15rem}
+.modal p{color:#cfe8f4;font-size:.95rem;margin-bottom:18px}
+.modal .btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.modal button{padding:9px 16px;border-radius:9px;cursor:pointer;font-weight:700;font-size:.9rem;
+  border:1px solid var(--linha);background:var(--card2);color:var(--texto)}
+.modal button.ok{background:var(--coral);border-color:var(--coral);color:#2a0b06}
+.modal button.ok.calmo{background:var(--ambar);border-color:var(--ambar);color:var(--abismo)}
+
+@media (max-width:600px){h1{font-size:1.6rem}.questao{padding:17px 15px}.qtexto{font-size:.98rem}}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <span class="selo">Ciências &middot; 7º ano &middot; Avaliação mensal 1</span>
+    <h1>Simulado — <span>prova de mentirinha</span></h1>
+    <p class="sub">20 questões no estilo da avaliação &middot; capítulos 11 e 12</p>
+  </div>
+</header>
+
+<nav class="abas">
+  <div class="wrap">
+    <a href="index.html">🏠 Início</a>
+    <a href="leitura.html">📖 Leitura Guiada</a>
+    <a href="quiz.html">🎯 Quiz</a>
+    <a href="resumo.html">🗺️ Resumo</a>
+    <a href="simulado.html" class="atual">📝 Simulado</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="instru">
+    <h2>Antes de começar</h2>
+    <ul>
+      <li>São <b>20 questões</b>. Reserve cerca de <b>40 minutos</b>, sem consultar nada.</li>
+      <li>Só clique em <b>Corrigir</b> no fim — a graça é simular a prova de verdade.</li>
+      <li>Depois de corrigir, leia <b>todas</b> as explicações, inclusive as das alternativas erradas.</li>
+      <li>Ao corrigir aparece o <b>código de liberação</b> no formato <b>SIM-XX-YY</b>.</li>
+    </ul>
+    <div class="barra"><i id="barra"></i></div>
+    <div class="contagem" id="contagem">0 de 20 respondidas</div>
+  </div>
+
+  <div id="lista"></div>
+
+  <div class="acoes">
+    <button type="button" id="btCorrigir">Corrigir o simulado</button>
+  </div>
+
+  <div class="resultado" id="resultado">
+    <div class="nota" id="nota">0 / 20</div>
+    <div class="msg" id="msg"></div>
+    <div class="codigo" id="codigo">SIM-00-XX</div>
+    <div class="codigo-leg">Código de liberação do Simulado</div>
+    <div class="revisar" id="revisar" style="display:none"><b>Voltar nestes assuntos:</b><span id="revisarTxt"></span></div>
+  </div>
+
+  <div class="proximo">
+    <p>Errou alguma? Volte no material certo e refaça o simulado depois.</p>
+    <a href="resumo.html">🗺️ Rever o Resumo</a>
+    <a href="leitura.html">📖 Rever a Leitura</a>
+  </div>
+
+  <footer class="rodape">Material de estudo para jovem aprendiz &middot; Ciências 7º ano &middot; Capítulos 11 e 12</footer>
+</main>
+
+<div class="painel">
+  <div class="status" id="status">Suas respostas são salvas sozinhas.</div>
+  <button type="button" id="btExportar">📥 Exportar</button>
+  <button type="button" id="btImportar">📤 Importar</button>
+  <button type="button" class="perigo" id="btZerar">🗑️ Zerar tudo</button>
+  <input type="file" id="arquivo" accept=".json" style="display:none">
+</div>
+
+<div class="velo" id="velo">
+  <div class="modal">
+    <h3 id="mdTitulo">Confirmar</h3>
+    <p id="mdTexto">...</p>
+    <div class="btns">
+      <button type="button" id="mdCancelar">Cancelar</button>
+      <button type="button" class="ok" id="mdOk">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var QUESTOES = [
+    { id:"s01", tema:"Cordados — características do filo",
+      texto:"O ser humano adulto não tem notocorda nem cauda. Ainda assim, é classificado como cordado. Por quê?",
+      alts:[
+        {id:"a", ok:true, txt:"Porque apresenta notocorda, tubo nervoso dorsal, fendas faringianas e cauda pós-anal na fase embrionária.",
+         com:"Correta. A classificação considera o embrião: basta que a notocorda apareça em pelo menos uma fase da vida. Depois ela é parcialmente substituída pelas vértebras, as fendas se fecham e a cauda desaparece."},
+        {id:"b", txt:"Porque mantém a notocorda íntegra durante toda a vida adulta.",
+         com:"Errada. Quem mantém a notocorda a vida toda é o cefalocordado, como o anfioxo. No ser humano ela é parcialmente substituída pelas vértebras."},
+        {id:"c", txt:"Porque possui esqueleto ósseo e crânio, estruturas exclusivas do filo dos cordados.",
+         com:"Errada. Crânio e vértebras são exclusivos dos vertebrados, que são apenas um dos dois grupos de cordados — não definem o filo inteiro."},
+        {id:"d", txt:"Porque respira por brânquias durante a fase larval.",
+         com:"Errada. O ser humano não passa por fase larval nem respira por brânquias em nenhum momento; as fendas faringianas do embrião se fecham."}
+      ]},
+
+    { id:"s02", tema:"Notocorda e coluna vertebral",
+      texto:"Qual é a relação entre a notocorda e os discos intervertebrais?",
+      alts:[
+        {id:"a", ok:true, txt:"Em alguns cordados a coluna vertebral substitui parcialmente a notocorda, e parte dela passa a compor os discos intervertebrais.",
+         com:"Correta. É exatamente o que o capítulo descreve: a notocorda não some por inteiro — parte dela forma os discos intervertebrais."},
+        {id:"b", txt:"A notocorda desaparece totalmente e os discos intervertebrais são formados por tecido ósseo.",
+         com:"Errada. Os discos são de cartilagem, tecido flexível, e vêm em parte da notocorda."},
+        {id:"c", txt:"Os discos intervertebrais são vértebras menores localizadas apenas na região lombar.",
+         com:"Errada. Discos intervertebrais não são vértebras: são as \"almofadas\" que ficam entre elas e amortecem os movimentos."},
+        {id:"d", txt:"A notocorda se transforma na medula espinal ao longo do desenvolvimento.",
+         com:"Errada. Quem origina o sistema nervoso é o tubo nervoso dorsal; a medula espinal é protegida pelas vértebras."}
+      ]},
+
+    { id:"s03", tema:"Protocordados — urocordados",
+      texto:"A ascídia é um protocordado. Assinale a alternativa que a descreve corretamente.",
+      alts:[
+        {id:"a", ok:true, txt:"É um urocordado séssil, que filtra a água para obter alimento, e apresenta notocorda restrita à cauda e apenas na fase larval.",
+         com:"Correta. Séssil significa que o animal fica fixo em um lugar. A notocorda restrita à cauda e só na larva é o que define o grupo dos urocordados."},
+        {id:"b", txt:"É um cefalocordado que nada livremente e mantém a notocorda por toda a vida.",
+         com:"Errada. Essa descrição é a do anfioxo, que é cefalocordado. A ascídia é urocordado."},
+        {id:"c", txt:"É um protocordado que possui vértebras, mas não possui crânio.",
+         com:"Errada. Nenhum protocordado tem vértebras nem crânio — é justamente isso que os separa dos vertebrados."},
+        {id:"d", txt:"É um vertebrado ágnato de água doce, aparentado com a lampreia.",
+         com:"Errada. A ascídia não é vertebrada e os protocordados descritos no capítulo são todos marinhos."}
+      ]},
+
+    { id:"s04", tema:"Vertebrados — crânio",
+      texto:"O crânio dos vertebrados pode ser definido como:",
+      alts:[
+        {id:"a", ok:true, txt:"Estrutura óssea ou cartilaginosa que envolve o encéfalo, funcionando como uma caixa de proteção.",
+         com:"Correta. O cérebro faz parte do encéfalo, e o crânio é a caixa que o protege."},
+        {id:"b", txt:"Conjunto de vértebras que protege a medula espinal.",
+         com:"Errada. Essa é a definição de coluna vertebral."},
+        {id:"c", txt:"Estrutura móvel e articulada que auxilia na mordida e na mastigação.",
+         com:"Errada. Essa é a mandíbula, presente nos gnatostomados."},
+        {id:"d", txt:"Tecido forte e flexível presente nas orelhas e na ponta do nariz.",
+         com:"Errada. Isso é a cartilagem — um tecido, não uma estrutura do esqueleto da cabeça."}
+      ]},
+
+    { id:"s05", tema:"Vertebrados — reprodução",
+      texto:"Sobre a reprodução dos vertebrados, assinale a alternativa correta.",
+      alts:[
+        {id:"a", ok:true, txt:"É sexuada, com fecundação interna ou externa; a maioria apresenta sexos separados, mas existem espécies hermafroditas.",
+         com:"Correta. Hermafroditas são indivíduos que possuem ambos os sexos. A reprodução também pode passar por fase larval."},
+        {id:"b", txt:"É assexuada nos grupos aquáticos e sexuada apenas nos terrestres.",
+         com:"Errada. A reprodução dos vertebrados é sexuada em todos os grupos, aquáticos ou terrestres."},
+        {id:"c", txt:"Todos os vertebrados apresentam desenvolvimento direto, sem fase larval.",
+         com:"Errada. Peixes e anfíbios podem ter desenvolvimento indireto, com fase larval (alevinos, girinos)."},
+        {id:"d", txt:"Todos os vertebrados apresentam fecundação interna.",
+         com:"Errada. A fecundação pode ser interna ou externa. Na maioria dos peixes, por exemplo, é externa."}
+      ]},
+
+    { id:"s06", tema:"Tabela dos grupos — sistema digestório",
+      texto:"Em quais grupos de vertebrados o sistema digestório completo termina em cloaca?",
+      alts:[
+        {id:"a", ok:true, txt:"Anfíbios, répteis, aves e peixes cartilaginosos.",
+         com:"Correta. A cloaca é o orifício comum aos sistemas excretor, digestório e reprodutivo. Peixes ósseos e mamíferos terminam em ânus."},
+        {id:"b", txt:"Apenas mamíferos e peixes ósseos.",
+         com:"Errada. Justamente esses dois são os que terminam em ânus, e não em cloaca."},
+        {id:"c", txt:"Apenas as aves.",
+         com:"Errada. As aves têm cloaca, mas não são as únicas: anfíbios, répteis e peixes cartilaginosos também."},
+        {id:"d", txt:"Todos os vertebrados, sem exceção.",
+         com:"Errada. Peixes ósseos e mamíferos são as exceções: têm ânus."}
+      ]},
+
+    { id:"s07", tema:"Tabela dos grupos — respiração",
+      texto:"A respiração das aves é descrita como:",
+      alts:[
+        {id:"a", ok:true, txt:"Pulmonar, com sacos aéreos.",
+         com:"Correta. Os sacos aéreos são a marca da respiração das aves na tabela do capítulo."},
+        {id:"b", txt:"Pulmonar, com alvéolos pulmonares.",
+         com:"Errada. Alvéolos pulmonares são a característica da respiração dos mamíferos."},
+        {id:"c", txt:"Branquial na fase jovem e cutânea na fase adulta.",
+         com:"Errada. Essa é a situação dos anfíbios: branquial na fase larval, pulmonar e cutânea na maioria dos adultos."},
+        {id:"d", txt:"Exclusivamente cutânea, pela pele.",
+         com:"Errada. Nenhum grupo de vertebrados respira exclusivamente pela pele; a respiração cutânea aparece nos anfíbios junto com a pulmonar."}
+      ]},
+
+    { id:"s08", tema:"Tabela dos grupos — reprodução dos répteis",
+      texto:"Sobre a reprodução dos répteis, é correto afirmar:",
+      alts:[
+        {id:"a", ok:true, txt:"Fecundação interna e desenvolvimento direto; podem ser ovíparos, ovovivíparos ou vivíparos.",
+         com:"Correta. É exatamente a linha dos répteis na tabela do capítulo."},
+        {id:"b", txt:"Fecundação externa e desenvolvimento indireto, com fase larval.",
+         com:"Errada. Essa descrição se aproxima dos anfíbios (sapos e rãs), e não dos répteis."},
+        {id:"c", txt:"Fecundação interna e todos vivíparos.",
+         com:"Errada. Vivíparos \"a maioria\" é característica dos mamíferos. Entre os répteis há ovíparos, ovovivíparos e vivíparos."},
+        {id:"d", txt:"Fecundação externa e todos ovíparos.",
+         com:"Errada. Nos répteis a fecundação é interna, e nem todos são ovíparos."}
+      ]},
+
+    { id:"s09", tema:"Peixes — respiração",
+      texto:"A piramboia, peixe brasileiro da Amazônia, é citada como exemplo de peixe pulmonado porque:",
+      alts:[
+        {id:"a", ok:true, txt:"Além das brânquias, possui estruturas semelhantes a pulmões que absorvem oxigênio do ar, e pode se enterrar na areia e entrar em dormência quando falta água.",
+         com:"Correta. Peixes pulmonados vivem em regiões onde o volume de água se reduz na época da seca, impedindo a respiração branquial."},
+        {id:"b", txt:"Respira apenas pela pele, como fazem os anfíbios adultos.",
+         com:"Errada. Respiração cutânea é característica de anfíbios; a piramboia mantém as brânquias e ainda tem estruturas semelhantes a pulmões."},
+        {id:"c", txt:"É um peixe cartilaginoso marinho que sobe à superfície para respirar.",
+         com:"Errada. A piramboia é um peixe de água doce da região amazônica, e a característica citada é a respiração pulmonar auxiliar."},
+        {id:"d", txt:"Perdeu completamente as brânquias ao longo da evolução.",
+         com:"Errada. Ela tem brânquias E estruturas semelhantes a pulmões — as duas coisas."}
+      ]},
+
+    { id:"s10", tema:"Peixes — reprodução",
+      texto:"O clásper é:",
+      alts:[
+        {id:"a", ok:true, txt:"Uma estrutura presente no corpo dos machos de alguns peixes cartilaginosos, usada na cópula, já que esses animais realizam fecundação interna.",
+         com:"Correta. É a estrutura que possibilita a fecundação interna nos condrictes."},
+        {id:"b", txt:"Um órgão elástico que armazena gás e regula a flutuabilidade.",
+         com:"Errada. Isso é a bexiga natatória, exclusiva dos peixes ósseos."},
+        {id:"c", txt:"Uma escama modificada que protege as brânquias dos peixes ósseos.",
+         com:"Errada. Quem protege as brânquias dos ósseos é o opérculo."},
+        {id:"d", txt:"A larva produzida pelos peixes com desenvolvimento indireto.",
+         com:"Errada. Essa larva se chama alevino."}
+      ]},
+
+    { id:"s11", tema:"Peixes — desenvolvimento",
+      texto:"O que são alevinos?",
+      alts:[
+        {id:"a", ok:true, txt:"Larvas produzidas no desenvolvimento indireto dos peixes, que depois se desenvolvem em indivíduos adultos.",
+         com:"Correta. Quando o desenvolvimento é indireto, o embrião gera uma larva chamada alevino."},
+        {id:"b", txt:"Ovos de peixe ainda não fecundados, liberados na água durante a piracema.",
+         com:"Errada. Ovos não são larvas. Os gametas liberados na piracema é que serão fecundados."},
+        {id:"c", txt:"Peixes adultos de pequeno porte que vivem em cardumes, como a manjubinha.",
+         com:"Errada. Manjubinha é uma espécie de peixe pequeno, não uma fase do desenvolvimento."},
+        {id:"d", txt:"Filhotes dos peixes cartilaginosos, que têm desenvolvimento indireto.",
+         com:"Errada. Os cartilaginosos têm desenvolvimento DIRETO, ou seja, não passam por fase larval."}
+      ]},
+
+    { id:"s12", tema:"Peixes — piracema",
+      texto:"O fenômeno da piracema consiste em:",
+      alts:[
+        {id:"a", ok:true, txt:"Peixes nadarem contra a correnteza, rio acima, em direção às águas calmas das nascentes, onde liberam seus gametas na água.",
+         com:"Correta. A subida é tão difícil que os peixes perdem gordura corporal e produzem hormônios que estimulam o amadurecimento das glândulas sexuais, favorecendo a reprodução."},
+        {id:"b", txt:"Peixes descerem os rios em direção ao mar durante o período de seca.",
+         com:"Errada. A piracema é o movimento contrário: rio acima, contra a correnteza, durante as chuvas de verão."},
+        {id:"c", txt:"A migração de aves aquáticas para os rios na época das chuvas.",
+         com:"Errada. Piracema é um fenômeno reprodutivo de peixes."},
+        {id:"d", txt:"O período em que os peixes se enterram na areia e entram em estado de dormência.",
+         com:"Errada. Essa é a estratégia dos peixes pulmonados, como a piramboia, na seca."}
+      ]},
+
+    { id:"s13", tema:"Condrictes — escamas",
+      texto:"As escamas placoides dos peixes cartilaginosos se caracterizam por:",
+      alts:[
+        {id:"a", ok:true, txt:"Terem composição semelhante à dos dentes de outros vertebrados: cobertas por esmalte e com a parte interna formada por dentina.",
+         com:"Correta. Elas têm formato de placas, por isso o nome placoides."},
+        {id:"b", txt:"Serem escamas dérmicas típicas, iguais às dos peixes ósseos.",
+         com:"Errada. Escamas dérmicas são as dos peixes ósseos; as placoides são exclusivas dos cartilaginosos."},
+        {id:"c", txt:"Serem formadas por queratina, assim como as penas das aves.",
+         com:"Errada. A queratina forma unhas, pelos, cabelos, penas e alguns tipos de escamas, mas as placoides são de esmalte e dentina."},
+        {id:"d", txt:"Serem placas ósseas móveis que cobrem e protegem as brânquias.",
+         com:"Errada. Isso descreve o opérculo, que é dos peixes ósseos. Nos cartilaginosos as fendas branquiais ficam expostas."}
+      ]},
+
+    { id:"s14", tema:"Osteíctes — opérculo",
+      texto:"O opérculo é:",
+      alts:[
+        {id:"a", ok:true, txt:"Uma estrutura dos peixes ósseos que cobre as brânquias, protegendo-as, e que se abre e fecha auxiliando no bombeamento de água.",
+         com:"Correta. A água entra pela boca e, com o auxílio do movimento opercular, sai pelas brânquias."},
+        {id:"b", txt:"O conjunto de fendas branquiais expostas na lateral da cabeça dos tubarões.",
+         com:"Errada. Fendas expostas são justamente a característica dos cartilaginosos, que NÃO têm opérculo."},
+        {id:"c", txt:"Um órgão sensorial que detecta correntes elétricas de outros animais.",
+         com:"Errada. Essa é a função das ampolas de Lorenzini."},
+        {id:"d", txt:"Uma nadadeira modificada que estabiliza o corpo do peixe durante o nado.",
+         com:"Errada. O opérculo não é nadadeira; as nadadeiras são caudal, pélvica, dorsal, peitoral e lateral."}
+      ]},
+
+    { id:"s15", tema:"Peixes — bexiga natatória",
+      texto:"Quando um peixe ósseo nada para locais mais profundos, o que acontece com a bexiga natatória e como o animal reage?",
+      alts:[
+        {id:"a", ok:true, txt:"A pressão da água aumenta e diminui o volume da bexiga, reduzindo a flutuabilidade; para evitar isso, o peixe secreta gás dentro dela.",
+         com:"Correta. Descendo: mais pressão, menos volume, menos flutuabilidade — então o peixe coloca gás na bexiga."},
+        {id:"b", txt:"A pressão da água aumenta e o peixe retira gás da bexiga para compensar.",
+         com:"Errada. Retirar gás é o que ele faz ao SUBIR, quando a pressão diminui e a bexiga se expande demais."},
+        {id:"c", txt:"A pressão diminui e a bexiga se expande, aumentando a flutuabilidade.",
+         com:"Errada. Essa é a situação de quem nada em direção à superfície, não em direção ao fundo."},
+        {id:"d", txt:"A bexiga se enche de água para dar peso ao animal e ajudá-lo a descer.",
+         com:"Errada. A bexiga natatória armazena gás, e não água."}
+      ]},
+
+    { id:"s16", tema:"Osteíctes — dimorfismo sexual",
+      texto:"Dizer que muitos peixes ósseos apresentam dimorfismo sexual significa que:",
+      alts:[
+        {id:"a", ok:true, txt:"O macho é diferente da fêmea — nos lebistes, por exemplo, o macho é esguio, colorido e de cauda alongada, enquanto a fêmea é maior e mais encorpada.",
+         com:"Correta. Dimorfismo sexual é a diferença de forma entre macho e fêmea da mesma espécie."},
+        {id:"b", txt:"Todos os indivíduos possuem os dois sexos ao mesmo tempo.",
+         com:"Errada. Isso é hermafroditismo, que é outra coisa."},
+        {id:"c", txt:"O macho carrega os ovos em uma bolsa no abdome.",
+         com:"Errada. Isso é o comportamento do cavalo-marinho, um caso específico de cuidado com os ovos, e não a definição de dimorfismo."},
+        {id:"d", txt:"O animal muda de sexo ao longo da vida.",
+         com:"Errada. Dimorfismo sexual é diferença de aparência entre machos e fêmeas, não mudança de sexo."}
+      ]},
+
+    { id:"s17", tema:"Peixes abissais",
+      texto:"Sobre os peixes abissais, é correto afirmar que:",
+      alts:[
+        {id:"a", ok:true, txt:"Habitam grandes profundidades, resistindo à alta pressão, à baixa temperatura e à pouca disponibilidade de alimento; alguns apresentam bioluminescência para atrair presas.",
+         com:"Correta. O peixe-diabo-negro é o exemplo citado. \"Abissal\" quer dizer relacionado a grandes profundidades."},
+        {id:"b", txt:"Vivem em águas rasas e usam a luz do sol para se camuflar entre os corais.",
+         com:"Errada. Abissal é o oposto: ambientes profundos e totalmente sem luz."},
+        {id:"c", txt:"São todos peixes cartilaginosos filtradores, como o tubarão-baleia.",
+         com:"Errada. O grupo não é definido pelo tipo de esqueleto nem pela alimentação, e sim pelo ambiente de grande profundidade."},
+        {id:"d", txt:"Sobem regularmente à superfície para respirar ar atmosférico.",
+         com:"Errada. Quem tem estruturas para absorver oxigênio do ar são os peixes pulmonados, como a piramboia."}
+      ]},
+
+    { id:"s18", tema:"Identificação — condricte × osteícte",
+      texto:"Um peixe apresenta boca em posição terminal, brânquias cobertas por opérculo e bexiga natatória. Trata-se de:",
+      alts:[
+        {id:"a", ok:true, txt:"Um peixe ósseo (osteícte), como o pirarucu.",
+         com:"Correta. Boca terminal, opérculo e bexiga natatória são os três sinais clássicos dos peixes ósseos."},
+        {id:"b", txt:"Um peixe cartilaginoso (condricte), como a arraia.",
+         com:"Errada. Nos cartilaginosos a boca é ventral, as fendas branquiais são expostas e não existe bexiga natatória."},
+        {id:"c", txt:"Um ciclóstomo, como a lampreia.",
+         com:"Errada. O ciclóstomo é ágnato, com boca circular, esqueleto cartilaginoso e coluna vertebral incompleta — nem sequer é classificado com os peixes."},
+        {id:"d", txt:"Um protocordado, como o anfioxo.",
+         com:"Errada. Protocordados não têm vértebras, crânio, opérculo nem bexiga natatória."}
+      ]},
+
+    { id:"s19", tema:"Anfíbios — transição para a terra",
+      texto:"Assinale a alternativa correta sobre os anfíbios.",
+      alts:[
+        {id:"a", ok:true, txt:"Foram os primeiros vertebrados a alcançar o ambiente terrestre, mas continuam dependentes da água para a reprodução, o desenvolvimento até a fase adulta e a hidratação da pele.",
+         com:"Correta. Por isso são mais comuns em regiões de clima úmido, como as florestas tropicais."},
+        {id:"b", txt:"Foram os primeiros vertebrados a surgir na Terra, antes mesmo dos peixes.",
+         com:"Errada. A vida começou na água e a evolução dos vertebrados se deu a partir dos peixes; os anfíbios vêm depois."},
+        {id:"c", txt:"São endotérmicos e, por isso, independentes da temperatura do ambiente.",
+         com:"Errada. Os anfíbios são ectotérmicos: dependem de uma fonte de calor externa."},
+        {id:"d", txt:"Possuem pele grossa e bastante queratinizada, o que evita a perda de água.",
+         com:"Errada. É o contrário: a pele é fina e com pouca queratina, portanto permeável e sujeita ao ressecamento."}
+      ]},
+
+    { id:"s20", tema:"Queratina",
+      texto:"A queratina é uma proteína que:",
+      alts:[
+        {id:"a", ok:true, txt:"Está presente na pele, impermeabiliza e protege contra a dessecação, e forma unhas, pelos, cabelos, penas e alguns tipos de escamas.",
+         com:"Correta. É justamente a pouca queratina que deixa a pele do anfíbio permeável e dependente de ambientes úmidos."},
+        {id:"b", txt:"Forma o tecido flexível que constitui o esqueleto dos tubarões.",
+         com:"Errada. O esqueleto dos tubarões é de cartilagem, que é um tecido, e não essa proteína."},
+        {id:"c", txt:"Compõe o muco que recobre a pele dos anfíbios para mantê-la hidratada.",
+         com:"Errada. O muco é outra coisa: ele cobre a pele justamente porque falta queratina para impermeabilizá-la."},
+        {id:"d", txt:"Forma a notocorda dos cordados durante a fase embrionária.",
+         com:"Errada. A notocorda é uma estrutura em forma de bastão, não um produto da queratina."}
+      ]}
+  ];
+
+  function semente(txt){
+    var h = 2166136261;
+    for(var i=0;i<txt.length;i++){ h ^= txt.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function rng(s){
+    return function(){
+      s |= 0; s = (s + 0x6D2B79F5) | 0;
+      var t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function embaralhar(arr, sem){
+    var r = rng(sem), a = arr.slice();
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(r()*(i+1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  var LETRAS = "ABCDEFGHJKLMNPQRSTUVWXYZ"; // sem I e sem O
+  function duasLetras(){
+    return LETRAS.charAt(Math.floor(Math.random()*LETRAS.length))
+         + LETRAS.charAt(Math.floor(Math.random()*LETRAS.length));
+  }
+
+  var CHAVE = "ccf_cien7_cap11_12_simulado_v1";
+  var memoria = null;
+  function ler(){
+    try{ var s = localStorage.getItem(CHAVE); return s ? JSON.parse(s) : null; }
+    catch(e){ return memoria; }
+  }
+  function gravar(o){ memoria = o; try{ localStorage.setItem(CHAVE, JSON.stringify(o)); }catch(e){} }
+
+  var estado = ler() || {respostas:{}, corrigido:false, letras:null, salvoEm:null};
+  if(!estado.respostas) estado.respostas = {};
+  if(!estado.letras) estado.letras = duasLetras();
+
+  var lista = document.getElementById("lista");
+  QUESTOES.forEach(function(q, idx){
+    var ordem = embaralhar(q.alts, semente("simulado-cordados-" + q.id));
+    var div = document.createElement("div");
+    div.className = "questao"; div.id = "cx-" + q.id;
+    var html = '<div class="qtopo"><span class="qnum">'+(idx+1)+'</span><div class="qtexto">'+q.texto+'</div></div><div class="alts">';
+    ordem.forEach(function(a, i){
+      var letra = String.fromCharCode(97+i);
+      html += '<label class="alt" data-alt="'+a.id+'" for="'+q.id+'-'+a.id+'">'
+            + '<input type="radio" name="'+q.id+'" id="'+q.id+'-'+a.id+'" value="'+a.id+'">'
+            + '<span class="letra">'+letra+')</span>'
+            + '<span class="altbloco"><span>'+a.txt+'</span>'
+            + '<span class="coment">'+a.com+'</span></span></label>';
+    });
+    html += "</div>";
+    div.innerHTML = html;
+    lista.appendChild(div);
+  });
+
+  QUESTOES.forEach(function(q){
+    var r = estado.respostas[q.id];
+    if(r){
+      var inp = document.getElementById(q.id+"-"+r);
+      if(inp){ inp.checked = true; inp.parentNode.classList.add("sel"); }
+    }
+  });
+
+  lista.addEventListener("change", function(e){
+    if(e.target && e.target.type === "radio"){
+      var nome = e.target.name;
+      Array.prototype.slice.call(document.getElementsByName(nome)).forEach(function(i){
+        i.parentNode.classList.remove("sel");
+      });
+      e.target.parentNode.classList.add("sel");
+      estado.respostas[nome] = e.target.value;
+      estado.salvoEm = new Date().toISOString();
+      gravar(estado); atualizar();
+    }
+  });
+
+  function contarRespondidas(){
+    var n = 0;
+    QUESTOES.forEach(function(q){ if(estado.respostas[q.id]) n++; });
+    return n;
+  }
+  function atualizar(){
+    var n = contarRespondidas();
+    document.getElementById("barra").style.width = (n/QUESTOES.length*100)+"%";
+    document.getElementById("contagem").textContent = n+" de "+QUESTOES.length+" respondidas";
+    var el = document.getElementById("status");
+    if(estado.salvoEm){
+      var d = new Date(estado.salvoEm);
+      var f = ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear()
+            +" às "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+      el.innerHTML = "✅ <b>"+n+"</b> de "+QUESTOES.length+" respondidas &middot; salvo em "+f;
+    }else{
+      el.textContent = "Suas respostas são salvas sozinhas.";
+    }
+  }
+  atualizar();
+
+  function corretaDe(q){
+    for(var i=0;i<q.alts.length;i++){ if(q.alts[i].ok) return q.alts[i].id; }
+    return null;
+  }
+
+  function corrigir(){
+    var acertos = 0, temas = [];
+    QUESTOES.forEach(function(q){
+      var certa = corretaDe(q);
+      var minha = estado.respostas[q.id];
+      if(minha === certa) acertos++; else temas.push(q.tema);
+      var cx = document.getElementById("cx-"+q.id);
+      cx.classList.add("mostrando");
+      Array.prototype.slice.call(cx.querySelectorAll(".alt")).forEach(function(lab){
+        var aid = lab.getAttribute("data-alt");
+        lab.classList.remove("sel");
+        lab.classList.add(aid === certa ? "certa" : "errada");
+        var inp = lab.querySelector("input");
+        if(inp) inp.disabled = true;
+      });
+    });
+    var xx = (acertos<10?"0":"") + acertos;
+    var cod = "SIM-"+xx+"-"+estado.letras;
+    document.getElementById("nota").textContent = acertos+" / "+QUESTOES.length;
+    var pct = acertos/QUESTOES.length, msg;
+    if(pct >= 0.9) msg = "Preparação sólida. Dá para chegar na prova tranquilo.";
+    else if(pct >= 0.75) msg = "Bom resultado. Revise só os assuntos listados abaixo.";
+    else if(pct >= 0.5) msg = "Base existe, mas ainda escapa coisa. Volte no Resumo e refaça o simulado amanhã.";
+    else msg = "Vale reler a Leitura Guiada com calma antes de repetir. Leia todas as explicações abaixo — elas mostram exatamente onde está o buraco.";
+    document.getElementById("msg").textContent = msg;
+    document.getElementById("codigo").textContent = cod;
+    if(temas.length){
+      var unicos = [];
+      temas.forEach(function(t){ if(unicos.indexOf(t) === -1) unicos.push(t); });
+      document.getElementById("revisarTxt").textContent = unicos.join(" &middot; ").replace(/&middot;/g, "•");
+      document.getElementById("revisar").style.display = "";
+    }else{
+      document.getElementById("revisar").style.display = "none";
+    }
+    document.getElementById("resultado").classList.add("on");
+    var bt = document.getElementById("btCorrigir");
+    bt.disabled = true; bt.textContent = "Simulado corrigido";
+    estado.corrigido = true; estado.acertos = acertos; estado.codigo = cod;
+    estado.salvoEm = new Date().toISOString();
+    gravar(estado);
+    document.getElementById("resultado").scrollIntoView({behavior:"smooth", block:"center"});
+  }
+
+  var velo = document.getElementById("velo");
+  var acao = null;
+  function abrirModal(t, x, rot, calmo, fn){
+    document.getElementById("mdTitulo").textContent = t;
+    document.getElementById("mdTexto").textContent = x;
+    var ok = document.getElementById("mdOk");
+    ok.textContent = rot; ok.className = calmo ? "ok calmo" : "ok";
+    document.getElementById("mdCancelar").style.display = fn ? "" : "none";
+    acao = fn; velo.classList.add("on");
+  }
+  function fechar(){ velo.classList.remove("on"); acao = null; }
+  document.getElementById("mdCancelar").addEventListener("click", fechar);
+  document.getElementById("mdOk").addEventListener("click", function(){ var f = acao; fechar(); if(f) f(); });
+  velo.addEventListener("click", function(e){ if(e.target === velo) fechar(); });
+
+  document.getElementById("btCorrigir").addEventListener("click", function(){
+    var faltam = QUESTOES.length - contarRespondidas();
+    if(faltam > 0){
+      abrirModal("Ainda faltam questões",
+        "Você deixou "+faltam+" questão(ões) em branco. Na prova de verdade isso conta como erro. Corrigir assim mesmo?",
+        "Corrigir assim mesmo", false, corrigir);
+    }else{
+      corrigir();
+    }
+  });
+
+  if(estado.corrigido) corrigir();
+
+  document.getElementById("btExportar").addEventListener("click", function(){
+    var blob = new Blob([JSON.stringify(estado, null, 2)], {type:"application/json"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "simulado-cordados.json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
+  });
+  var arq = document.getElementById("arquivo");
+  document.getElementById("btImportar").addEventListener("click", function(){ arq.click(); });
+  arq.addEventListener("change", function(){
+    var f = arq.files && arq.files[0];
+    if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      try{
+        var o = JSON.parse(r.result);
+        if(!o || typeof o !== "object" || !o.respostas) throw new Error("formato");
+        gravar(o);
+        abrirModal("Pronto", "Respostas importadas. A página vai recarregar.", "Fechar", true, null);
+        setTimeout(function(){ location.reload(); }, 900);
+      }catch(e){
+        abrirModal("Não deu certo", "O arquivo escolhido não parece ser um backup deste Simulado.", "Fechar", true, null);
+      }
+      arq.value = "";
+    };
+    r.readAsText(f);
+  });
+  document.getElementById("btZerar").addEventListener("click", function(){
+    abrirModal("Apagar tudo?", "Suas respostas e a correção deste Simulado serão apagadas.", "Apagar", false, function(){
+      try{ localStorage.removeItem(CHAVE); }catch(e){}
+      memoria = null; location.reload();
+    });
+  });
+})();
+</script>
+</body>
+</html>
