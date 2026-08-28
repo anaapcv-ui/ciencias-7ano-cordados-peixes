@@ -9,7 +9,7 @@
   --abismo:#03101c; --fundo:#06182a; --card:#0c2637; --card2:#113347;
   --linha:#1d5570; --texto:#e2f3fb; --suave:#9dc3d8;
   --bio:#3fe3c9; --bio2:#0fb9a3; --ambar:#ffc14d; --coral:#ff8172;
-  --verde:#3ddc84; --cinza:#7a93a6; --roxo:#a98cff;
+  --verde:#3ddc84; --verde2:#22a05f; --cinza:#7a93a6;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -18,181 +18,148 @@ body{
     radial-gradient(900px 500px at 90% 5%, #10304a 0%, transparent 55%),
     linear-gradient(180deg,#06182a 0%, #03101c 100%);
   background-attachment:fixed;
-  color:var(--texto);
-  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  color:var(--texto); font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
   line-height:1.65; padding-bottom:70px;
 }
 .wrap{max-width:900px;margin:0 auto;padding:0 18px}
-
-/* ---------- topo ---------- */
 header.topo{
-  background:linear-gradient(135deg,#062132 0%, #0a3b4f 55%, #0d5a5a 100%);
-  border-bottom:2px solid var(--bio2);
-  padding:34px 0 26px; position:relative; overflow:hidden;
+  background:linear-gradient(135deg,#06301f 0%, #0a4a30 55%, #0d5a5a 100%);
+  border-bottom:2px solid var(--verde); padding:34px 0 26px;
 }
-header.topo::after{
-  content:""; position:absolute; inset:0;
-  background:radial-gradient(600px 200px at 80% 120%, rgba(63,227,201,.22), transparent 70%);
-  pointer-events:none;
-}
-.selo{
-  display:inline-block; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--abismo); background:var(--bio); padding:5px 12px; border-radius:20px; font-weight:700;
-}
-h1{font-size:2.05rem; margin:12px 0 6px; line-height:1.15; letter-spacing:-.5px}
-h1 span{color:var(--bio)}
-.sub{color:var(--suave); font-size:.98rem}
+.selo{display:inline-block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--abismo);background:var(--verde);padding:5px 12px;border-radius:20px;font-weight:700}
+h1{font-size:2.05rem;margin:12px 0 6px;line-height:1.15;letter-spacing:-.5px}
+h1 span{color:var(--verde)}
+.sub{color:var(--suave);font-size:.98rem}
 
-/* ---------- navegacao ---------- */
-nav.abas{
-  position:sticky; top:0; z-index:40;
-  background:rgba(4,20,34,.93); backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--linha);
-}
-nav.abas .wrap{display:flex; gap:6px; overflow-x:auto; padding:9px 18px}
-nav.abas a{
-  flex:0 0 auto; text-decoration:none; color:var(--suave);
-  padding:8px 14px; border-radius:9px; font-size:.9rem; font-weight:600;
-  border:1px solid transparent; white-space:nowrap;
-}
-nav.abas a:hover{background:var(--card); color:var(--texto)}
-nav.abas a.atual{background:var(--bio); color:var(--abismo); border-color:var(--bio)}
+nav.abas{position:sticky;top:0;z-index:40;background:rgba(4,20,34,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
+nav.abas .wrap{display:flex;gap:6px;overflow-x:auto;padding:9px 18px}
+nav.abas a{flex:0 0 auto;text-decoration:none;color:var(--suave);padding:8px 14px;border-radius:9px;
+  font-size:.9rem;font-weight:600;border:1px solid transparent;white-space:nowrap}
+nav.abas a:hover{background:var(--card);color:var(--texto)}
+nav.abas a.atual{background:var(--verde);color:var(--abismo);border-color:var(--verde)}
 
-/* ---------- conteudo ---------- */
-main{padding-top:30px}
-section.bloco{
-  background:linear-gradient(180deg, rgba(17,51,71,.55), rgba(12,38,55,.75));
-  border:1px solid var(--linha); border-radius:16px;
-  padding:24px 22px; margin-bottom:26px;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-.numero{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:34px;height:34px;border-radius:11px;
-  background:var(--bio); color:var(--abismo); font-weight:800; font-size:1rem;
-  margin-right:10px; flex:0 0 auto;
-}
-.cabeca{display:flex; align-items:center; margin-bottom:14px}
-.cabeca h2{font-size:1.32rem; line-height:1.25; color:var(--bio)}
-section.bloco p{margin-bottom:12px; color:#d6ecf7}
-strong{color:#fff}
-em.termo{color:var(--ambar); font-style:normal; font-weight:700}
+main{padding-top:26px}
+.instru{background:linear-gradient(180deg, rgba(17,51,71,.55), rgba(12,38,55,.75));
+  border:1px solid var(--linha);border-radius:16px;padding:20px 22px;margin-bottom:22px}
+.instru h2{color:var(--verde);font-size:1.15rem;margin-bottom:8px}
+.instru p{color:#d6ecf7;font-size:.95rem;margin-bottom:6px}
+.barra{height:9px;background:rgba(3,16,28,.7);border-radius:20px;overflow:hidden;margin:14px 0 6px;border:1px solid var(--linha)}
+.barra i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--verde2),var(--verde));transition:width .3s}
+.contagem{font-size:.85rem;color:var(--suave);text-align:right}
 
-ul.lista{margin:6px 0 14px 4px; list-style:none}
-ul.lista li{padding-left:22px; position:relative; margin-bottom:9px; color:#d6ecf7}
-ul.lista li::before{content:"◈"; position:absolute; left:0; color:var(--bio2)}
+.bloco{
+  background:linear-gradient(180deg, rgba(17,51,71,.5), rgba(12,38,55,.72));
+  border:1px solid var(--linha);border-radius:16px;padding:24px;margin-bottom:22px;
+  box-shadow:0 8px 26px rgba(0,0,0,.3);
+}
+.bloco.trancado{display:none}
+.btopo{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.bnum{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;
+  border-radius:12px;background:var(--verde);color:var(--abismo);font-weight:800;font-size:1.05rem;flex:0 0 auto}
+.btag{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--verde);font-weight:800}
+.btopo h2{font-size:1.3rem;color:#fff;line-height:1.2}
+.btexto{color:#d9edf8;font-size:.97rem}
+.btexto p{margin-bottom:12px}
+.btexto ul{margin:0 0 12px 20px}
+.btexto li{margin-bottom:6px}
+.btexto b, .btexto strong{color:#fff}
+.btexto .destaque{border-left:4px solid var(--verde);background:rgba(61,220,132,.08);
+  padding:11px 14px;border-radius:0 11px 11px 0;margin:13px 0;font-size:.94rem}
+.btexto .destaque b{color:var(--verde)}
+.btexto .armadilha{border-left:4px solid var(--coral);background:rgba(255,129,114,.09);
+  padding:11px 14px;border-radius:0 11px 11px 0;margin:13px 0;font-size:.94rem}
+.btexto .armadilha b{color:var(--coral)}
+.btexto .curio{border-left:4px solid var(--ambar);background:rgba(255,193,77,.08);
+  padding:11px 14px;border-radius:0 11px 11px 0;margin:13px 0;font-size:.94rem}
+.btexto .curio b{color:var(--ambar)}
+.rolagem{overflow-x:auto;margin:13px 0;border-radius:11px;border:1px solid var(--linha)}
+.btexto table{border-collapse:collapse;width:100%;min-width:560px;font-size:.86rem}
+.btexto th,.btexto td{border:1px solid var(--linha);padding:7px 10px;text-align:left;vertical-align:top}
+.btexto th{background:rgba(34,160,95,.2);color:var(--verde);font-weight:700}
+.btexto td:first-child{background:rgba(29,85,112,.35);font-weight:700;color:#fff}
+.fluxo{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:12px 0;font-size:.87rem}
+.fluxo .no{background:var(--card2);border:1px solid var(--verde2);padding:6px 11px;border-radius:9px;font-weight:600}
+.fluxo .seta{color:var(--verde2);font-weight:800}
 
-.destaque{
-  border-left:4px solid var(--ambar); background:rgba(255,193,77,.09);
-  padding:13px 16px; border-radius:0 12px 12px 0; margin:14px 0; font-size:.96rem;
+.perguntas{margin-top:20px;border-top:1px dashed var(--linha);padding-top:16px}
+.perguntas h3{color:var(--verde);font-size:1.02rem;margin-bottom:4px}
+.perguntas .dica-uso{color:var(--suave);font-size:.85rem;margin-bottom:12px}
+.perg{margin-bottom:15px}
+.perg .enun{color:#eaf7fd;font-weight:600;font-size:.95rem;margin-bottom:7px}
+.perg textarea{
+  width:100%;min-height:64px;background:rgba(3,16,28,.6);border:1px solid var(--linha);
+  border-radius:10px;color:var(--texto);padding:10px 12px;font-family:inherit;font-size:.93rem;
+  resize:vertical;line-height:1.5;
 }
-.destaque b{color:var(--ambar)}
-.palavra{
-  border-left:4px solid var(--roxo); background:rgba(169,140,255,.10);
-  padding:13px 16px; border-radius:0 12px 12px 0; margin:14px 0; font-size:.95rem;
-}
-.palavra b{color:var(--roxo)}
-.cuidado{
-  border-left:4px solid var(--coral); background:rgba(255,129,114,.10);
-  padding:13px 16px; border-radius:0 12px 12px 0; margin:14px 0; font-size:.95rem;
-}
-.cuidado b{color:var(--coral)}
+.perg textarea:focus{outline:none;border-color:var(--verde2)}
+.perg textarea:disabled{opacity:.8}
+.modelo{display:none;margin-top:9px;border-left:4px solid var(--verde);background:rgba(61,220,132,.09);
+  padding:10px 13px;border-radius:0 10px 10px 0;font-size:.91rem;color:#cdeeda}
+.modelo b{color:var(--verde)}
+.conferido .modelo{display:block}
+.aval{display:none;margin-top:8px;gap:8px}
+.conferido .aval{display:flex;flex-wrap:wrap}
+.aval button{background:var(--card2);border:1px solid var(--linha);color:var(--suave);
+  padding:6px 12px;border-radius:8px;font-size:.83rem;font-weight:700;cursor:pointer}
+.aval button.on-ok{background:rgba(61,220,132,.18);border-color:var(--verde);color:var(--verde)}
+.aval button.on-rev{background:rgba(255,193,77,.15);border-color:var(--ambar);color:var(--ambar)}
 
-.tabela-rolagem{overflow-x:auto; margin:16px 0; border-radius:12px; border:1px solid var(--linha)}
-table{border-collapse:collapse; width:100%; min-width:640px; font-size:.88rem}
-th,td{border:1px solid var(--linha); padding:9px 11px; text-align:left; vertical-align:top}
-th{background:rgba(15,185,163,.18); color:var(--bio); font-weight:700}
-td:first-child{background:rgba(29,85,112,.35); font-weight:700; color:#fff}
+.acao-bloco{margin-top:16px;text-align:center}
+.acao-bloco button{
+  background:var(--verde);color:var(--abismo);border:none;padding:12px 28px;border-radius:11px;
+  font-size:.98rem;font-weight:800;cursor:pointer;
+}
+.acao-bloco button:hover{background:#66e8a3}
+.acao-bloco button:disabled{background:var(--card2);color:var(--cinza);cursor:not-allowed}
+.acao-bloco .obs{color:var(--cinza);font-size:.82rem;margin-top:7px}
+.finalizado{display:none;margin-top:12px;text-align:center;color:var(--verde);font-weight:700;font-size:.92rem}
+.conferido-bloco .finalizado{display:block}
+.conferido-bloco .acao-bloco button{display:none}
+.conferido-bloco .acao-bloco .obs{display:none}
 
-.esquema{
-  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
-  justify-content:center; margin:18px 0; font-size:.86rem;
-}
-.no{
-  background:var(--card2); border:1px solid var(--bio2); color:var(--texto);
-  padding:8px 13px; border-radius:10px; font-weight:600;
-}
-.no.raiz{background:var(--bio); color:var(--abismo); border-color:var(--bio)}
-.seta{color:var(--bio2); font-weight:700}
+.pegadinhas{border:1px solid var(--coral);border-radius:16px;padding:24px;margin-bottom:22px;
+  background:linear-gradient(180deg, rgba(255,129,114,.10), rgba(12,38,55,.72))}
+.pegadinhas h2{color:var(--coral);font-size:1.3rem;margin-bottom:12px}
+.pegadinhas ol{margin-left:20px;color:#f2dcd8}
+.pegadinhas li{margin-bottom:9px;font-size:.94rem}
+.pegadinhas b{color:#fff}
 
-/* ---------- pare e pense ---------- */
-.pense{
-  margin-top:18px; border:1px dashed var(--bio2); border-radius:14px;
-  background:rgba(63,227,201,.07); padding:16px;
-}
-.pense h3{font-size:1rem; color:var(--bio); margin-bottom:6px}
-.pense p.perg{color:#cfe8f4; font-size:.95rem; margin-bottom:10px}
-.pense textarea{
-  width:100%; min-height:82px; resize:vertical;
-  background:rgba(3,16,28,.75); border:1px solid var(--linha); border-radius:10px;
-  color:var(--texto); padding:11px; font-family:inherit; font-size:.94rem; line-height:1.5;
-}
-.pense textarea:focus{outline:none; border-color:var(--bio); box-shadow:0 0 0 3px rgba(63,227,201,.18)}
-.pista{margin-top:9px}
-.pista button{
-  background:transparent; border:1px solid var(--bio2); color:var(--bio);
-  padding:6px 12px; border-radius:8px; cursor:pointer; font-size:.85rem; font-weight:600;
-}
-.pista button:hover{background:rgba(63,227,201,.14)}
-.pista .resp{
-  display:none; margin-top:9px; font-size:.92rem; color:#cfe8f4;
-  background:rgba(3,16,28,.6); border-left:3px solid var(--bio); padding:10px 13px; border-radius:0 10px 10px 0;
-}
-.pista.aberta .resp{display:block}
+.cobertura{border:1px solid var(--linha);border-radius:16px;padding:24px;margin-bottom:22px;
+  background:linear-gradient(180deg, rgba(17,51,71,.5), rgba(12,38,55,.72))}
+.cobertura h2{color:var(--verde);font-size:1.2rem;margin-bottom:6px}
+.cobertura p{color:var(--suave);font-size:.9rem;margin-bottom:12px}
 
-/* ---------- painel salvamento ---------- */
-.painel{
-  position:fixed; left:0; right:0; bottom:0; z-index:60;
-  background:rgba(4,20,34,.97); border-top:1px solid var(--linha);
-  padding:9px 18px; display:flex; gap:9px; align-items:center; flex-wrap:wrap;
-  font-size:.84rem;
-}
-.painel .status{color:var(--suave); flex:1 1 190px; min-width:150px}
-.painel .status b{color:var(--bio)}
-.painel button{
-  background:var(--card2); color:var(--texto); border:1px solid var(--linha);
-  padding:7px 12px; border-radius:9px; cursor:pointer; font-size:.84rem; font-weight:600;
-}
-.painel button:hover{border-color:var(--bio); color:var(--bio)}
-.painel button.perigo:hover{border-color:var(--coral); color:var(--coral)}
-
-/* ---------- proximo ---------- */
-.proximo{
-  margin:34px 0 20px; text-align:center;
-  background:linear-gradient(135deg, rgba(15,185,163,.18), rgba(63,227,201,.06));
-  border:1px solid var(--bio2); border-radius:16px; padding:24px 18px;
-}
-.proximo p{color:var(--suave); margin-bottom:12px; font-size:.95rem}
-.proximo a{
-  display:inline-block; background:var(--bio); color:var(--abismo);
-  text-decoration:none; font-weight:800; padding:13px 26px; border-radius:11px; font-size:1rem;
-}
+.proximo{margin:30px 0 20px;text-align:center;
+  background:linear-gradient(135deg, rgba(15,185,163,.15), rgba(63,227,201,.05));
+  border:1px solid var(--bio2);border-radius:16px;padding:24px 18px}
+.proximo p{color:var(--suave);margin-bottom:12px;font-size:.95rem}
+.proximo a{display:inline-block;background:var(--bio);color:var(--abismo);text-decoration:none;
+  font-weight:800;padding:13px 26px;border-radius:11px}
 .proximo a:hover{background:#6ff0dc}
+footer.rodape{text-align:center;color:var(--cinza);font-size:.8rem;padding:18px 0 8px}
 
-footer.rodape{text-align:center; color:var(--cinza); font-size:.8rem; padding:18px 0 8px}
+.painel{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(4,20,34,.97);
+  border-top:1px solid var(--linha);padding:9px 18px;display:flex;gap:9px;align-items:center;flex-wrap:wrap;font-size:.84rem}
+.painel .status{color:var(--suave);flex:1 1 190px;min-width:150px}
+.painel .status b{color:var(--verde)}
+.painel button{background:var(--card2);color:var(--texto);border:1px solid var(--linha);
+  padding:7px 12px;border-radius:9px;cursor:pointer;font-size:.84rem;font-weight:600}
+.painel button:hover{border-color:var(--verde);color:var(--verde)}
+.painel button.perigo:hover{border-color:var(--coral);color:var(--coral)}
 
-/* ---------- modal ---------- */
-.velo{
-  display:none; position:fixed; inset:0; z-index:100;
-  background:rgba(2,10,18,.82); align-items:center; justify-content:center; padding:20px;
-}
+.velo{display:none;position:fixed;inset:0;z-index:100;background:rgba(2,10,18,.82);align-items:center;justify-content:center;padding:20px}
 .velo.on{display:flex}
-.modal{
-  background:var(--card); border:1px solid var(--bio2); border-radius:16px;
-  padding:24px; max-width:420px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.6);
-}
-.modal h3{color:var(--bio); margin-bottom:10px; font-size:1.15rem}
-.modal p{color:#cfe8f4; font-size:.95rem; margin-bottom:18px}
-.modal .btns{display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap}
-.modal button{padding:9px 16px; border-radius:9px; cursor:pointer; font-weight:700; font-size:.9rem; border:1px solid var(--linha); background:var(--card2); color:var(--texto)}
-.modal button.ok{background:var(--coral); border-color:var(--coral); color:#2a0b06}
-.modal button.ok.calmo{background:var(--bio); border-color:var(--bio); color:var(--abismo)}
+.modal{background:var(--card);border:1px solid var(--verde2);border-radius:16px;padding:24px;max-width:420px;width:100%}
+.modal h3{color:var(--verde);margin-bottom:10px;font-size:1.15rem}
+.modal p{color:#cfe8f4;font-size:.95rem;margin-bottom:18px}
+.modal .btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.modal button{padding:9px 16px;border-radius:9px;cursor:pointer;font-weight:700;font-size:.9rem;
+  border:1px solid var(--linha);background:var(--card2);color:var(--texto)}
+.modal button.ok{background:var(--coral);border-color:var(--coral);color:#2a0b06}
+.modal button.ok.calmo{background:var(--verde);border-color:var(--verde);color:var(--abismo)}
 
-@media (max-width:600px){
-  h1{font-size:1.6rem}
-  section.bloco{padding:19px 16px}
-  .cabeca h2{font-size:1.15rem}
-}
+@media (max-width:600px){h1{font-size:1.6rem}.bloco{padding:18px 15px}}
 </style>
 </head>
 <body>
@@ -201,7 +168,7 @@ footer.rodape{text-align:center; color:var(--cinza); font-size:.8rem; padding:18
   <div class="wrap">
     <span class="selo">Ciências &middot; 7º ano &middot; Avaliação mensal 1</span>
     <h1>Leitura Guiada — <span>Cordados, Vertebrados e Peixes</span></h1>
-    <p class="sub">Capítulo 11 completo + Capítulo 12 (peixes) &middot; leia com calma, um bloco de cada vez</p>
+    <p class="sub">Capítulo 11 completo + Capítulo 12 (peixes) &middot; leia um bloco, escreva as respostas e destrave o próximo</p>
   </div>
 </header>
 
@@ -216,356 +183,60 @@ footer.rodape{text-align:center; color:var(--cinza); font-size:.8rem; padding:18
 </nav>
 
 <main class="wrap">
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">1</span><h2>O que faz de um animal um cordado</h2></div>
-  <p>Golfinho, tartaruga, onça-pintada, sapo, pardal, serpente e você. Nada parece unir bichos tão diferentes — mas todos são <strong>cordados</strong>. O que os junta não está no lado de fora: está numa estrutura que aparece ainda no embrião.</p>
-  <p>Essa estrutura é a <em class="termo">notocorda</em>: um bastão fino que corre ao longo das costas do embrião. Em algumas espécies ela funciona como sustentação do corpo a vida inteira. Em outras, ela é <strong>parcialmente substituída pelas vértebras</strong>, que formam a coluna vertebral.</p>
-  <div class="destaque"><b>A regra de ouro:</b> um cordado tem notocorda em <b>pelo menos uma fase</b> da vida. Não precisa ser a vida toda — basta aparecer em algum momento.</div>
-  <p>Além da notocorda, o embrião dos cordados apresenta três estruturas exclusivas, que podem ou não persistir até a fase adulta:</p>
-  <ul class="lista">
-    <li><strong>Tubo nervoso dorsal</strong> — origina o sistema nervoso dos cordados.</li>
-    <li><strong>Fendas faringianas</strong> (ou branquiais) — persistem nos cordados aquáticos adultos, formando as <strong>brânquias</strong> (órgãos das trocas gasosas). Nos terrestres, elas se fecham.</li>
-    <li><strong>Cauda pós-anal</strong> — quando persiste no adulto, auxilia na locomoção e no equilíbrio.</li>
-  </ul>
-  <p>O filo dos cordados se divide em dois grandes grupos: <strong>protocordados</strong> e <strong>vertebrados</strong>.</p>
-  <div class="esquema">
-    <span class="no raiz">Cordados</span><span class="seta">→</span>
-    <span class="no">Protocordados</span><span class="seta">→</span>
-    <span class="no">Urocordados (ascídia)</span>
-    <span class="no">Cefalocordados (anfioxo)</span>
-  </div>
-  <div class="esquema">
-    <span class="no raiz">Cordados</span><span class="seta">→</span>
-    <span class="no">Vertebrados</span><span class="seta">→</span>
-    <span class="no">peixes, anfíbios, répteis, aves, mamíferos</span>
+  <div class="instru">
+    <h2>Como funciona</h2>
+    <p>São <b>12 blocos</b>. Em cada um: leia o texto com calma e <b>escreva com as suas palavras</b> as respostas das 3 perguntas — escrever é o que faz o conteúdo fixar de verdade.</p>
+    <p>O botão <b>Conferir</b> só libera quando as 3 respostas estiverem preenchidas. Depois de conferir, compare com a <b>resposta modelo</b>, marque <b>Acertei</b> ou <b>Preciso revisar</b> em cada uma, e o próximo bloco se abre.</p>
+    <div class="barra"><i id="barra"></i></div>
+    <div class="contagem" id="contagem">Bloco 1 de 12</div>
   </div>
 
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">O ser humano adulto não tem notocorda nem cauda. Então por que ele é um cordado?</p>
-    <textarea data-chave="p1" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">Porque a classificação olha para o <b>embrião</b>, e não só para o adulto. O embrião humano tem notocorda, tubo nervoso dorsal, fendas faringianas e cauda pós-anal. Depois a notocorda é parcialmente substituída pelas vértebras, as fendas se fecham e a cauda desaparece — mas o animal continua sendo cordado.</div>
+  <div id="blocos"></div>
+
+  <div class="pegadinhas trancado" id="pegadinhas">
+    <h2>🚨 As 10 pegadinhas da prova</h2>
+    <ol>
+      <li><b>Lampreia parece peixe, mas não é.</b> É um ciclóstomo — ágnato, sem mandíbula, com coluna vertebral incompleta.</li>
+      <li><b>Ectotérmico regula a temperatura, sim!</b> Só que buscando calor fora do corpo (sol, sombra, água). Não caia em "não consegue regular".</li>
+      <li><b>Bexiga natatória é só dos peixes ósseos.</b> Tubarão e arraia não têm — por isso o tubarão precisa nadar quase o tempo todo.</li>
+      <li><b>Cloaca × ânus:</b> só os peixes ósseos e os mamíferos terminam em ânus. Peixes cartilaginosos, anfíbios, répteis e aves terminam em cloaca.</li>
+      <li><b>A exceção do coração:</b> répteis têm 3 cavidades, MAS os crocodilianos (jacarés e crocodilos) têm 4.</li>
+      <li><b>Notocorda: basta 1 fase da vida.</b> O ser humano adulto não tem, e mesmo assim é cordado — o embrião tinha.</li>
+      <li><b>Fendas faringianas viram brânquias</b> nos aquáticos (não viram pulmões!). Nos terrestres, elas se fecham.</li>
+      <li><b>Uro × céfalo:</b> UROcordado = notocorda só na caUda e só na larva (ascídia). CÉFALOcordado = da cabeça à cauda, a vida toda (anfioxo).</li>
+      <li><b>Alevinos são larvas</b>, não ovos. Aparecem no desenvolvimento indireto — e os cartilaginosos, com desenvolvimento direto, não têm larva.</li>
+      <li><b>Fecundação nos peixes:</b> externa na maioria — mas nos cartilaginosos é interna, com o clásper do macho.</li>
+    </ol>
+  </div>
+
+  <div class="cobertura trancado" id="cobertura">
+    <h2>🗂️ Tabela de cobertura — Tópico → Bloco</h2>
+    <p>Para conferir que nada do escopo ficou de fora. Se a professora citou um assunto, ele está aqui.</p>
+    <div class="rolagem btexto">
+      <table>
+        <tr><th>Tópico do livro</th><th>Onde está</th></tr>
+        <tr><td>Notocorda e estruturas exclusivas do embrião (cap. 11)</td><td>Bloco 1</td></tr>
+        <tr><td>Protocordados: urocordados e cefalocordados (cap. 11)</td><td>Bloco 2</td></tr>
+        <tr><td>Vertebrados: vértebras, crânio, esqueleto, coluna, cartilagem (cap. 11)</td><td>Bloco 3</td></tr>
+        <tr><td>Mandíbula: ágnatos × gnatostomados; ciclóstomos (cap. 11)</td><td>Bloco 4</td></tr>
+        <tr><td>Sistemas do corpo, cloaca, ecto × endotérmicos, reprodução (cap. 11)</td><td>Bloco 5</td></tr>
+        <tr><td>Tabela dos cinco grupos de vertebrados + sequência da evolução (cap. 11)</td><td>Bloco 6</td></tr>
+        <tr><td>Peixes: primeiros gnatostomados; Darwin; nutrição e digestão (cap. 12)</td><td>Bloco 7</td></tr>
+        <tr><td>Respiração branquial, peixes pulmonados, circulação (cap. 12)</td><td>Bloco 8</td></tr>
+        <tr><td>Sentidos (linha lateral, barbilhões), reprodução, piracema (cap. 12)</td><td>Bloco 9</td></tr>
+        <tr><td>Hidrodinâmica, escamas, nadadeiras, bexiga natatória (cap. 12)</td><td>Bloco 10</td></tr>
+        <tr><td>Condrictes × osteíctes: a comparação completa (cap. 12)</td><td>Bloco 11</td></tr>
+        <tr><td>Peixes abissais + entrada dos anfíbios (cap. 12)</td><td>Bloco 12</td></tr>
+      </table>
     </div>
   </div>
-</section>
 
-<section class="bloco">
-  <div class="cabeca"><span class="numero">2</span><h2>Protocordados: os cordados sem crânio</h2></div>
-  <p>Os protocordados são animais <strong>marinhos e de pequeno porte</strong>. Eles <strong>não têm vértebras nem crânio</strong>, mas todos têm notocorda — mesmo que apenas na fase larval. Fazem reprodução sexuada com <strong>fecundação externa</strong> e podem passar por fase larval.</p>
-  <p>São classificados em dois grupos, e a diferença entre eles é justamente <strong>onde fica</strong> e <strong>por quanto tempo dura</strong> a notocorda:</p>
-  <div class="tabela-rolagem">
-  <table>
-    <tr><th>Grupo</th><th>A notocorda...</th><th>Exemplo</th></tr>
-    <tr><td>Urocordados</td><td>fica restrita à <b>cauda</b> e ocorre apenas na <b>fase larval</b></td><td>ascídia</td></tr>
-    <tr><td>Cefalocordados</td><td>vai da <b>cabeça à cauda</b> e permanece <b>durante toda a vida</b></td><td>anfioxo</td></tr>
-  </table>
-  </div>
-  <p>A <strong>ascídia</strong> é um animal <em class="termo">séssil</em> — quer dizer, fica fixa num lugar, como as pedras e os corais — e filtra a água para obter alimento.</p>
-  <p>O <strong>anfioxo</strong> mede até 5 cm, vive parcialmente enterrado na areia do mar e também filtra a água. Como mantém o cordão nervoso dorsal e a notocorda durante todo o desenvolvimento, ele virou <strong>objeto de estudo sobre a evolução dos cordados</strong>: pesquisas com anfioxos já trouxeram informações importantes sobre como o cérebro dos cordados evoluiu.</p>
-  <div class="palavra"><b>Truque para não confundir:</b> <b>Uro</b>cordado lembra "cauda" (a notocorda só na cauda, só na larva). <b>Céfalo</b>cordado lembra "cabeça" (a notocorda vai da cabeça à cauda, a vida toda).</div>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Um animal marinho pequeno, sem crânio, com notocorda que vai da cabeça à cauda e dura a vida inteira. Que grupo é esse e qual o exemplo do livro?</p>
-    <textarea data-chave="p2" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">É um <b>cefalocordado</b>, e o exemplo é o <b>anfioxo</b>. Ele é protocordado, então não tem vértebras nem crânio.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">3</span><h2>Vertebrados: vértebras e crânio, com exclusividade</h2></div>
-  <p>Os vertebrados surgiram no período <strong>Cambriano</strong>, há <strong>meio bilhão de anos</strong>, e hoje habitam quase todos os ambientes da Terra. Existem mais de <strong>55 mil espécies</strong> conhecidas — um número pequeno perto do dos insetos (mais de 1 milhão de espécies descritas). Mesmo assim, os vertebrados se destacam por serem o grupo de animais com <strong>maior volume</strong> a habitar a Terra.</p>
-  <div class="destaque"><b>Duas estruturas exclusivas dos vertebrados:</b> <b>vértebras</b> e <b>crânio</b>. Nenhum protocordado tem isso.</div>
-  <p><strong>Esqueleto interno.</strong> Pode ser <strong>ósseo</strong> — formado por células vivas mais uma parte inorgânica, que confere rigidez — ou <strong>cartilaginoso</strong>, formado por cartilagem. Nos dois casos, o esqueleto é responsável pela <strong>sustentação do corpo, pela proteção dos órgãos e pela locomoção</strong>.</p>
-  <div class="palavra"><b>Cartilagem:</b> tecido muito forte e resistente, porém <b>flexível</b>. No corpo humano ela aparece nas orelhas, na ponta do nariz e nos discos intervertebrais — pequenas "almofadas" entre as vértebras que amortecem movimentos, saltos e pulos.</div>
-  <p><strong>Crânio.</strong> É uma estrutura óssea ou cartilaginosa que envolve o <strong>encéfalo</strong> (do qual o cérebro faz parte), funcionando como uma caixa de proteção.</p>
-  <p><strong>Coluna vertebral.</strong> Formada por um conjunto de vértebras que protegem a <strong>medula espinal</strong>, importante órgão do sistema nervoso. Ela também promove a sustentação e o equilíbrio do corpo. Em alguns cordados a coluna substitui parcialmente a notocorda — e parte dessa notocorda passa a compor os <strong>discos intervertebrais</strong>. No ser humano a coluna tem as regiões <strong>cervical, torácica e lombar</strong>, terminando no <strong>osso sacro</strong>.</p>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Qual é a relação entre a notocorda e os discos intervertebrais?</p>
-    <textarea data-chave="p3" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">Quando a coluna vertebral substitui parcialmente a notocorda, uma parte dessa notocorda não desaparece: ela passa a formar os <b>discos intervertebrais</b>, as almofadas de cartilagem que ficam entre as vértebras e amortecem os movimentos.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">4</span><h2>Ágnatos e gnatostomados: a história da mandíbula</h2></div>
-  <p>A <strong>mandíbula</strong> é uma estrutura <strong>móvel e articulada</strong> que auxilia na mordida e na mastigação. A maioria dos vertebrados tem mandíbula — e é por ela que o grupo se divide em dois:</p>
-  <div class="tabela-rolagem">
-  <table>
-    <tr><th>Grupo</th><th>Mandíbula</th><th>Representantes</th></tr>
-    <tr><td>Ágnatos</td><td><b>Não</b> têm</td><td>ciclóstomos (lampreia, peixe-bruxa)</td></tr>
-    <tr><td>Gnatostomados</td><td><b>Têm</b></td><td>peixes, anfíbios, répteis, aves, mamíferos</td></tr>
-  </table>
-  </div>
-  <div class="palavra"><b>De onde vem a palavra:</b> "ágnato" vem do grego, em que <i>a</i> significa "ausência, negação" e <i>gnatha</i> significa "mandíbula". Ou seja, <b>ágnato = organismo sem mandíbula</b>.</div>
-  <p>Os <strong>ciclóstomos</strong> — como as lampreias e os peixes-bruxa — são considerados os <strong>vertebrados mais antigos evolutivamente</strong>. Podem habitar tanto água doce quanto água salgada e vivem enterrados na areia ou grudados em outros vertebrados, como baleias, golfinhos e peixes maiores, dos quais são <strong>parasitas</strong>.</p>
-  <ul class="lista">
-    <li>corpo <strong>cilíndrico e alongado</strong>;</li>
-    <li><strong>boca circular</strong> com dentes que auxiliam na fixação ao hospedeiro;</li>
-    <li>esqueleto <strong>cartilaginoso</strong>;</li>
-    <li>coluna vertebral <strong>incompleta</strong>.</li>
-  </ul>
-  <div class="cuidado"><b>Pegadinha clássica:</b> a lampreia parece um peixe, mas <b>não é</b> classificada com os peixes. Ela é um ciclóstomo, e portanto um <b>ágnato</b> — sem mandíbula. Os peixes são gnatostomados.</div>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Que critério separa os vertebrados em ágnatos e gnatostomados? Dê um exemplo de cada.</p>
-    <textarea data-chave="p4" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">O critério é a <b>presença ou ausência de mandíbula</b>. Ágnatos não têm mandíbula (exemplo: lampreia ou peixe-bruxa, que são ciclóstomos, com esqueleto cartilaginoso e coluna vertebral incompleta). Gnatostomados têm mandíbula (exemplo: qualquer peixe, anfíbio, réptil, ave ou mamífero — um tubarão, um sapo, um ser humano).</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">5</span><h2>Como funciona o corpo de um vertebrado</h2></div>
-  <ul class="lista">
-    <li><strong>Sistema digestório completo</strong>, com boca e ânus.</li>
-    <li><strong>Sistema circulatório fechado</strong> — o sangue circula sempre dentro dos vasos. O formato do coração varia entre os grupos.</li>
-    <li><strong>Respiração</strong> pulmonar, branquial ou cutânea, dependendo do hábitat.</li>
-    <li><strong>Sistema nervoso</strong> dorsal e bem desenvolvido.</li>
-    <li><strong>Reprodução sexuada</strong>, com fecundação interna ou externa, podendo passar por fase larval. A maioria tem sexos separados, mas existem espécies <strong>hermafroditas</strong> (indivíduos com ambos os sexos).</li>
-  </ul>
-  <div class="palavra"><b>Cloaca:</b> orifício comum aos sistemas excretor, digestório e reprodutivo. Quem tem cloaca: peixes cartilaginosos, anfíbios, répteis e aves. Quem tem ânus separado: peixes ósseos e mamíferos.</div>
-  <div class="palavra">
-    <b>Ectotérmicos:</b> animais que usam uma <b>fonte externa</b> de calor, como o Sol, para regular a temperatura corporal.<br>
-    <b>Endotérmicos:</b> animais que <b>produzem calor</b> por meio de reações químicas que ocorrem no próprio organismo.
-  </div>
-  <div class="cuidado"><b>Cuidado com a armadilha:</b> ectotérmico <b>não</b> quer dizer "não consegue regular a temperatura". Ele regula sim — só que buscando calor <b>fora</b> do corpo (sol, sombra, água). Provas adoram essa troca.</div>
-  <p>De acordo com os estudos evolutivos, a vida se iniciou na água. As evidências científicas indicam que a evolução dos vertebrados se deu <strong>a partir dos peixes</strong>, com os <strong>anfíbios representando a transição para o ambiente terrestre</strong>, onde se estabeleceram répteis, aves e mamíferos.</p>
-  <div class="esquema">
-    <span class="no raiz">Peixes</span><span class="seta">→</span>
-    <span class="no">Anfíbios</span><span class="seta">→</span>
-    <span class="no">Répteis</span><span class="seta">→</span>
-    <span class="no">Aves</span><span class="seta">→</span>
-    <span class="no">Mamíferos</span>
+  <div class="proximo trancado" id="fim">
+    <p>Terminou a leitura? Agora teste o que ficou, enquanto o assunto está fresco.</p>
+    <a href="quiz.html">🎯 Ir para o Quiz →</a>
   </div>
 
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Por que um lagarto passa a manhã tomando sol numa pedra, e um cachorro não precisa fazer isso?</p>
-    <textarea data-chave="p5" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">Porque o lagarto (réptil) é <b>ectotérmico</b>: depende de uma fonte externa de calor, como o Sol, para aquecer o corpo. O cachorro (mamífero) é <b>endotérmico</b>: produz o próprio calor por reações químicas dentro do organismo.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">6</span><h2>A tabela dos cinco grupos (a mais cobrada da prova)</h2></div>
-  <p>Esta é a tabela que mais aparece em avaliação. Vale a pena ler linha por linha e depois tentar reconstruí-la de cabeça.</p>
-  <div class="tabela-rolagem">
-  <table>
-    <tr><th></th><th>Peixes</th><th>Anfíbios</th><th>Répteis</th><th>Aves</th><th>Mamíferos</th></tr>
-    <tr>
-      <td>Coração</td>
-      <td>2 cavidades: 1 átrio, 1 ventrículo</td>
-      <td>3 cavidades: 2 átrios, 1 ventrículo</td>
-      <td>3 cavidades: 2 átrios, 1 ventrículo parcialmente separado <b>(exceção: crocodilianos, com 4)</b></td>
-      <td>4 cavidades: 2 átrios, 2 ventrículos totalmente separados</td>
-      <td>4 cavidades: 2 átrios, 2 ventrículos totalmente separados</td>
-    </tr>
-    <tr>
-      <td>Respiração</td>
-      <td>branquial; pulmonar (alguns)</td>
-      <td>branquial (fase larval e alguns adultos); pulmonar e cutânea (maioria dos adultos)</td>
-      <td>pulmonar</td>
-      <td>pulmonar (sacos aéreos)</td>
-      <td>pulmonar (alvéolos pulmonares)</td>
-    </tr>
-    <tr>
-      <td>Temperatura</td>
-      <td>ectotérmicos</td><td>ectotérmicos</td><td>ectotérmicos</td>
-      <td><b>endotérmicos</b></td><td><b>endotérmicos</b></td>
-    </tr>
-    <tr>
-      <td>Sistema digestório</td>
-      <td>completo, com boca e ânus (ósseos) ou cloaca (cartilaginosos)</td>
-      <td>completo, com boca e cloaca</td>
-      <td>completo, com boca e cloaca</td>
-      <td>completo, com boca e cloaca</td>
-      <td>completo, com boca e ânus</td>
-    </tr>
-    <tr>
-      <td>Reprodução</td>
-      <td>fecundação interna e externa; desenvolvimento direto e indireto; ovíparos (a maioria), ovovivíparos (algumas espécies de tubarão) e vivíparos (alguns cartilaginosos e certos peixes menores)</td>
-      <td>fecundação interna (salamandras e cecílias) e externa (sapos e rãs); desenvolvimento indireto; ovíparos</td>
-      <td>fecundação interna; desenvolvimento direto; ovíparos, ovovivíparos e vivíparos</td>
-      <td>fecundação interna; desenvolvimento direto; ovíparos</td>
-      <td>fecundação interna; desenvolvimento direto; vivíparos (a maioria)</td>
-    </tr>
-  </table>
-  </div>
-  <div class="destaque"><b>Três chaves para memorizar:</b> 1) as cavidades do coração vão 2 → 3 → 3 → 4 → 4, na mesma ordem da evolução; 2) só aves e mamíferos são endotérmicos; 3) só peixes ósseos e mamíferos terminam em ânus — o resto termina em cloaca.</div>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Feche a tabela e responda: quantas cavidades tem o coração de um jacaré? E de um sapo?</p>
-    <textarea data-chave="p6" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">O jacaré é um <b>crocodiliano</b>, a exceção dos répteis: tem <b>4 cavidades</b>. Os demais répteis têm 3 (2 átrios e 1 ventrículo parcialmente separado). O sapo é anfíbio: <b>3 cavidades</b> (2 átrios e 1 ventrículo).</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">7</span><h2>Peixes: os primeiros animais com mandíbula</h2></div>
-  <p>A teoria da evolução, elaborada pelo cientista britânico <strong>Charles Darwin</strong>, fundamenta o conhecimento de como as espécies podem evoluir e se adaptar a diferentes ambientes. Peixes e anfíbios, junto com os ciclóstomos, são os <strong>primeiros vertebrados dentro da escala de evolução</strong>.</p>
-  <p>Os peixes são os <strong>primeiros animais com mandíbulas</strong>, formando o grupo mais antigo dentre os <strong>gnatostomados</strong>. Também apresentam <strong>coluna vertebral completa</strong> (diferente dos ciclóstomos!). Têm representantes marinhos e de água doce, tamanhos e formas variados — da manjubinha, de poucos centímetros, ao tubarão-baleia, de até 20 metros. São <strong>ectotérmicos</strong>.</p>
-  <div class="destaque"><b>Os dois grupos de peixes:</b> <b>cartilaginosos</b> (ou condrictes) e <b>ósseos</b> (ou osteíctes). O critério é o tipo de esqueleto.</div>
-  <p><strong>Nutrição e digestão.</strong> Os peixes podem ser carnívoros, herbívoros ou onívoros, e existem ainda <strong>filtradores</strong>, que se alimentam de plâncton. A mandíbula auxilia na mordida e na mastigação. O tubo digestório é completo: começa na boca e termina na <strong>cloaca</strong> (peixes cartilaginosos) ou no <strong>ânus</strong> (peixes ósseos).</p>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Duas coisas separam um peixe de uma lampreia. Quais são?</p>
-    <textarea data-chave="p7" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">O peixe tem <b>mandíbula</b> (é gnatostomado) e <b>coluna vertebral completa</b>. A lampreia é ágnata (sem mandíbula) e tem <b>coluna vertebral incompleta</b>, além de esqueleto cartilaginoso.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">8</span><h2>Respiração e circulação dos peixes</h2></div>
-  <p>A respiração dos peixes é <strong>branquial</strong>: eles absorvem o gás oxigênio dissolvido na água e eliminam o gás carbônico por meio das <strong>brânquias</strong>, estruturas pelas quais a água passa em fluxo contínuo ao entrar pela boca.</p>
-  <p>Há algumas espécies conhecidas como <strong>peixes pulmonados</strong> que, além das brânquias, têm estruturas semelhantes a pulmões, capazes de absorver o oxigênio do ar. Vivem em regiões onde, na época da seca, o volume de água se reduz e impede a respiração branquial. Alguns podem se enterrar na areia e entrar em estado de <strong>dormência</strong> até a água retornar. A <strong>piramboia</strong>, peixe brasileiro da região da Amazônia, é um exemplo.</p>
-  <p>Os peixes apresentam <strong>circulação fechada</strong> — o sangue circula sempre no interior dos vasos sanguíneos. O bombeamento é feito pelo coração, que possui <strong>duas cavidades: um átrio e um ventrículo</strong>. O sangue é oxigenado nas brânquias.</p>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Por que a piramboia sobrevive quando o rio seca, e outros peixes não?</p>
-    <textarea data-chave="p8" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">Porque ela é um <b>peixe pulmonado</b>: além das brânquias, tem estruturas semelhantes a pulmões que absorvem oxigênio <b>do ar</b>. Pode ainda se enterrar na areia e entrar em <b>dormência</b> até a água voltar.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">9</span><h2>Sentidos e reprodução dos peixes</h2></div>
-  <p>O sistema sensorial dos peixes é bastante desenvolvido: têm órgãos para a visão, audição aguçada, olfato e paladar bem desenvolvidos, com receptores químicos nas narinas e na boca. Alguns apresentam <strong>barbilhões</strong> — estruturas parecidas com "bigodes" que percebem sensações gustativas e táteis (a pirarara, da Bacia Amazônica, é um exemplo).</p>
-  <div class="destaque"><b>Linha lateral:</b> estrutura sensorial formada por <b>escamas porosas</b> que captam as vibrações na água, auxiliando na caça e na fuga de predadores. Também identifica alterações de <b>pressão</b> e <b>temperatura</b> da água.</div>
-  <p><strong>Reprodução.</strong> Os peixes apresentam reprodução <strong>sexuada</strong> e, em geral, indivíduos de <strong>sexos separados</strong>. A fecundação é <strong>externa na maioria</strong>; no entanto, alguns peixes cartilaginosos realizam <strong>fecundação interna</strong> — nesses casos, a cópula é feita por uma estrutura chamada <strong>clásper</strong>, presente no corpo dos machos.</p>
-  <p>O desenvolvimento dos embriões pode ser <strong>direto ou indireto</strong>. No desenvolvimento indireto são produzidas larvas chamadas <strong>alevinos</strong>, que depois se desenvolvem em indivíduos adultos.</p>
-  <div class="palavra"><b>Piracema:</b> durante as chuvas de verão, alguns peixes nadam <b>contra a correnteza</b>, rio acima, em direção às águas calmas das nascentes. A subida é tão difícil que eles perdem gordura corporal e produzem hormônios que estimulam o amadurecimento das glândulas sexuais, favorecendo a reprodução. Ao chegar, machos e fêmeas liberam seus gametas na água, onde ocorre a fecundação.</div>
-  <p>Curiosidade do livro: nos <strong>cavalos-marinhos</strong>, a fêmea deposita os óvulos dentro de uma bolsa localizada no abdome do <strong>macho</strong>. Ali eles são fecundados e permanecem até se desenvolverem — ou seja, é o macho quem carrega os ovos.</p>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Um peixe nada em água escura e mesmo assim desvia de um predador que se aproxima. Qual estrutura explica isso?</p>
-    <textarea data-chave="p9" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">A <b>linha lateral</b>: escamas porosas que captam as vibrações da água e detectam alterações de pressão, avisando o peixe da aproximação de outro animal mesmo sem ele enxergar.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">10</span><h2>Corpo de nadador: hidrodinâmica, nadadeiras e bexiga natatória</h2></div>
-  <p>Os peixes são organismos totalmente adaptados ao ambiente aquático. O corpo apresenta boa <em class="termo">hidrodinâmica</em> — formato que ajuda na passagem da água pela parte externa do corpo, diminuindo a resistência da água durante o nado.</p>
-  <p>A maioria das espécies tem o corpo revestido por <strong>escamas sobrepostas como as telhas de um telhado</strong>. Em algumas espécies, uma camada de <strong>muco</strong> revestindo o corpo torna o animal escorregadio. Essas características <strong>diminuem o atrito</strong> do corpo com a água, facilitando o nado.</p>
-  <p><strong>Nadadeiras.</strong> São estruturas locomotoras que auxiliam no nado, estabilizando o corpo e deslocando a água ao redor. Em geral existem <strong>cinco tipos</strong>: <strong>caudal, pélvica, dorsal, peitoral e lateral</strong>. Em algumas espécies podem estar fundidas, modificadas ou ausentes.</p>
-  <div class="destaque">
-    <b>Bexiga natatória — presente apenas nos peixes ósseos.</b> É um órgão elástico capaz de armazenar gás, que ajuda o peixe a manter a <b>flutuabilidade neutra</b> e a posição vertical na coluna de água.<br><br>
-    ↓ <b>Descendo:</b> a pressão da água aumenta sobre o corpo e sobre a bexiga, diminuindo seu volume e reduzindo a flutuabilidade. Para evitar isso, o peixe <b>secreta gás dentro</b> da bexiga.<br>
-    ↑ <b>Subindo:</b> a pressão diminui e a bexiga se expande, aumentando a flutuabilidade. O peixe então <b>retira gás</b> da bexiga.
-  </div>
-  <p>Curiosidade: o <strong>baiacu</strong>, quando se sente ameaçado, engole uma grande quantidade de água que se acumula no estômago de parede bastante flexível. O animal infla, assume forma esférica e aumenta até <strong>três vezes</strong> o tamanho original — uma estratégia de defesa que reduz o risco de ser predado.</p>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Um tubarão precisa nadar quase o tempo todo para não afundar. Que órgão ele não tem, e por quê?</p>
-    <textarea data-chave="p10" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">Ele não tem <b>bexiga natatória</b>, porque esse órgão é <b>exclusivo dos peixes ósseos</b> — e o tubarão é um peixe cartilaginoso (condricte). Sem a bexiga, ele não consegue ajustar a flutuabilidade armazenando gás.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">11</span><h2>Condrictes × Osteíctes: a comparação da prova</h2></div>
-  <p><strong>Peixes cartilaginosos (condrictes)</strong> habitam principalmente os ambientes marinhos. A pele é revestida por <strong>escamas placoides</strong> — escamas em formato de placas, com composição semelhante à dos dentes de outros vertebrados: cobertas por <strong>esmalte</strong> e com a parte interna formada por <strong>dentina</strong>.</p>
-  <ul class="lista">
-    <li>corpo <strong>fusiforme</strong> e <strong>boca ventral</strong> (embaixo), com várias filas de dentes pontiagudos;</li>
-    <li>orifícios anal, genital e urinário se unem na <strong>cloaca</strong>;</li>
-    <li>de <strong>cinco a sete pares de fendas branquiais expostas</strong>, posicionadas lateralmente na cabeça (sem opérculo);</li>
-    <li>olfato e visão bem desenvolvidos e linha lateral bastante sensível à pressão da água;</li>
-    <li><strong>ampolas de Lorenzini</strong>: estruturas na cabeça que percebem pequenos estímulos de <strong>correntes elétricas</strong> vindos da musculatura de outros animais, aumentando as chances de capturar uma presa;</li>
-    <li>sexos separados, <strong>fecundação interna</strong>, <strong>desenvolvimento direto</strong> (sem fase larval); podem ser ovíparos, vivíparos ou ovovivíparos;</li>
-    <li>exemplos: <strong>tubarões (cações), quimeras e arraias</strong>.</li>
-  </ul>
-  <div class="cuidado"><b>Vale saber:</b> a pesca predatória desses animais é um grave problema para o ecossistema marinho, pois eles são essenciais na manutenção do equilíbrio das cadeias alimentares. Muitos tubarões são vendidos com o nome de "cação" — a maioria dos consumidores desconhece a origem.</div>
-  <p><strong>Peixes ósseos (osteíctes)</strong> compõem um grupo com grande diversidade, tanto de água doce como salgada. A maioria tem o corpo revestido de <strong>escamas dérmicas</strong> e apresenta <strong>bexiga natatória</strong>, uma exclusividade do grupo.</p>
-  <ul class="lista">
-    <li>possuem brânquias, como os cartilaginosos, porém elas são cobertas pelos <strong>opérculos</strong> — estruturas que protegem as brânquias e se abrem e fecham, auxiliando no bombeamento de água;</li>
-    <li>orifícios anal e urogenital <strong>independentes</strong>; a maioria apresenta bexiga urinária;</li>
-    <li>a <strong>boca</strong> está em posição <strong>terminal ou frontal</strong> (na frente), diferente da boca ventral dos cartilaginosos;</li>
-    <li>visão, audição e olfato razoavelmente bem desenvolvidos, variando com a espécie;</li>
-    <li>separação de sexo, muitos com <strong>dimorfismo sexual</strong> (o macho é diferente da fêmea); <strong>fecundação externa</strong> na maioria;</li>
-    <li>exemplos: <strong>piranhas, lambaris, baiacus, cavalos-marinhos, garoupas e pirarucus</strong>.</li>
-  </ul>
-  <div class="tabela-rolagem">
-  <table>
-    <tr><th></th><th>Cartilaginosos (condrictes)</th><th>Ósseos (osteíctes)</th></tr>
-    <tr><td>Esqueleto</td><td>cartilaginoso</td><td>ósseo</td></tr>
-    <tr><td>Escamas</td><td>placoides (como dentes: esmalte + dentina)</td><td>dérmicas</td></tr>
-    <tr><td>Brânquias</td><td>5 a 7 pares de fendas <b>expostas</b></td><td>cobertas pelo <b>opérculo</b></td></tr>
-    <tr><td>Boca</td><td>ventral</td><td>terminal / frontal</td></tr>
-    <tr><td>Saída</td><td>cloaca</td><td>orifícios anal e urogenital independentes</td></tr>
-    <tr><td>Bexiga natatória</td><td>não têm</td><td><b>têm</b> (exclusiva do grupo)</td></tr>
-    <tr><td>Fecundação</td><td>interna (clásper)</td><td>externa na maioria</td></tr>
-    <tr><td>Desenvolvimento</td><td>direto (sem larva)</td><td>direto ou indireto (alevinos)</td></tr>
-    <tr><td>Exemplos</td><td>tubarão, arraia, quimera</td><td>piranha, lambari, garoupa, pirarucu, cavalo-marinho, baiacu</td></tr>
-  </table>
-  </div>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Você recebe a foto de um peixe: boca embaixo do focinho e várias fendas visíveis na lateral da cabeça. Cartilaginoso ou ósseo? Como você sabe?</p>
-    <textarea data-chave="p11" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp"><b>Cartilaginoso.</b> Dois sinais: a <b>boca ventral</b> (embaixo) e as <b>fendas branquiais expostas</b> na lateral da cabeça. Num peixe ósseo a boca é terminal/frontal e as brânquias ficam escondidas atrás do <b>opérculo</b>.</div>
-    </div>
-  </div>
-</section>
-
-<section class="bloco">
-  <div class="cabeca"><span class="numero">12</span><h2>Abissais — e a porta de entrada dos anfíbios</h2></div>
-  <p>Algumas espécies de peixes desenvolveram características que as ajudam a viver em ambientes <strong>totalmente sem luz</strong>, sobrevivendo nos oceanos profundos ou nas cavernas oceânicas.</p>
-  <p>Os <strong>peixes abissais</strong> habitam as grandes profundidades e resistem à alta pressão da coluna de água, à baixa temperatura e à pouca disponibilidade de alimento. Alguns apresentam <strong>bioluminescência</strong>, que utilizam para atrair as presas — é o caso do <strong>peixe-diabo-negro</strong>.</p>
-  <div class="palavra"><b>Abissal:</b> relacionado a grandes profundidades.</div>
-
-  <div class="destaque"><b>Fecha o conteúdo da prova.</b> O trecho abaixo é o começo do próximo assunto — leia para não ser pego de surpresa, mas o foco da avaliação está em tudo o que veio antes.</div>
-
-  <p><strong>Anfíbios: a transição para o ambiente terrestre.</strong> Os anfíbios foram os <strong>primeiros vertebrados a alcançar o ambiente terrestre</strong>, graças a características adquiridas evolutivamente. Mesmo assim, permanecem <strong>dependentes do meio aquático</strong> para a reprodução, para o desenvolvimento até a fase adulta e para a hidratação da pele.</p>
-  <p>A pele dos anfíbios é <strong>fina e com pouca queratina</strong>, o que a torna <strong>permeável</strong> e pode provocar perda de água, causando desidratação e ressecamento. Por isso é recoberta por <strong>muco</strong>, para manter-se hidratada — e por isso os anfíbios vivem em ambientes úmidos ou próximos a lagos. São <strong>ectotérmicos</strong>.</p>
-  <div class="palavra"><b>De onde vem a palavra:</b> "anfíbio" vem do grego <i>amphi</i> = "dos dois lados" e <i>bios</i> = "vida", isto é, <b>vida dupla</b> — uma fase no ambiente aquático e outra no terrestre.</div>
-  <div class="palavra"><b>Queratina:</b> proteína presente na pele cuja função é impermeabilizar e proteger contra a dessecação. Ela forma unhas, pelos, cabelos, penas e alguns tipos de escamas.</div>
-
-  <div class="pense">
-    <h3>✋ Pare e pense</h3>
-    <p class="perg">Por que um sapo não sobrevive num deserto, mesmo sendo um animal terrestre?</p>
-    <textarea data-chave="p12" placeholder="Escreva com suas palavras..."></textarea>
-    <div class="pista"><button type="button">Ver uma resposta possível</button>
-      <div class="resp">Porque a pele do anfíbio é <b>fina e tem pouca queratina</b>, então é permeável e perde água com facilidade. Sem umidade ele desidrata e resseca. Além disso, ainda depende da água para a reprodução e para o desenvolvimento até a fase adulta.</div>
-    </div>
-  </div>
-</section>
-
-<div class="proximo">
-  <p>Terminou a leitura? Agora teste o que ficou, enquanto o assunto está fresco.</p>
-  <a href="quiz.html">🎯 Ir para o Quiz →</a>
-</div>
-
-<footer class="rodape">Material de estudo para jovem aprendiz &middot; Ciências 7º ano &middot; Capítulos 11 e 12</footer>
+  <footer class="rodape">Material de estudo para jovem aprendiz &middot; Ciências 7º ano &middot; Capítulos 11 e 12</footer>
 </main>
 
 <div class="painel">
@@ -590,91 +261,317 @@ footer.rodape{text-align:center; color:var(--cinza); font-size:.8rem; padding:18
 <script>
 (function(){
   "use strict";
-  var CHAVE = "ccf_cien7_cap11_12_leitura_v1";
+
+  var BLOCOS = [
+
+  { tag:"Capítulo 11", titulo:"O que faz de um animal um cordado",
+    html:'<p>Golfinho, tartaruga, onça-pintada, sapo, pardal, serpente e você. Nada parece unir bichos tão diferentes — mas todos são <b>cordados</b>. O que os junta não está no lado de fora: está numa estrutura que aparece ainda no embrião.</p><p>Essa estrutura é a <i>notocorda</i>: um bastão fino que corre ao longo das costas do embrião. Em algumas espécies ela funciona como sustentação do corpo a vida inteira. Em outras, ela é <b>parcialmente substituída pelas vértebras</b>, que formam a coluna vertebral.</p><div class="destaque"><b>A regra de ouro:</b> um cordado tem notocorda em <b>pelo menos uma fase</b> da vida. Não precisa ser a vida toda — basta aparecer em algum momento.</div><p>Além da notocorda, o embrião dos cordados apresenta três estruturas exclusivas, que podem ou não persistir até a fase adulta:</p><ul><li><b>Tubo nervoso dorsal</b> — origina o sistema nervoso dos cordados.</li><li><b>Fendas faringianas</b> (ou branquiais) — persistem nos cordados aquáticos adultos, formando as <b>brânquias</b> (órgãos das trocas gasosas). Nos terrestres, elas se fecham.</li><li><b>Cauda pós-anal</b> — quando persiste no adulto, auxilia na locomoção e no equilíbrio.</li></ul><p>O filo dos cordados se divide em dois grandes grupos: <b>protocordados</b> e <b>vertebrados</b>.</p><div class="fluxo"><span class="no">Cordados</span><span class="seta">→</span><span class="no">Protocordados</span><span class="seta">→</span><span class="no">Urocordados (ascídia)</span><span class="no">Cefalocordados (anfioxo)</span></div><div class="fluxo"><span class="no">Cordados</span><span class="seta">→</span><span class="no">Vertebrados</span><span class="seta">→</span><span class="no">peixes, anfíbios, répteis, aves, mamíferos</span></div>',
+    qs:[
+      {p:"O que é a notocorda e o que acontece com ela em algumas espécies durante o desenvolvimento?",
+       rm:"É um bastão fino que corre ao longo das costas do embrião e serve de sustentação. Em algumas espécies dura a vida inteira; em outras, é parcialmente substituída pelas vértebras, que formam a coluna vertebral."},
+      {p:"Além da notocorda, cite as três estruturas exclusivas do embrião dos cordados e diga uma função de cada uma.",
+       rm:"Tubo nervoso dorsal (origina o sistema nervoso), fendas faringianas (nos aquáticos adultos viram as brânquias, órgãos das trocas gasosas; nos terrestres se fecham) e cauda pós-anal (quando persiste no adulto, ajuda na locomoção e no equilíbrio)."},
+      {p:"O ser humano adulto não tem notocorda nem cauda. Então por que ele é um cordado?",
+       rm:"Porque a classificação olha para o embrião: o embrião humano tem notocorda, tubo nervoso dorsal, fendas faringianas e cauda pós-anal. Depois a notocorda é parcialmente substituída pelas vértebras, as fendas se fecham e a cauda desaparece — mas o animal continua sendo cordado, pois basta a notocorda aparecer em uma fase da vida."}
+    ]},
+
+  { tag:"Capítulo 11", titulo:"Protocordados: os cordados sem crânio",
+    html:'<p>Os protocordados são animais <b>marinhos e de pequeno porte</b>. Eles <b>não têm vértebras nem crânio</b>, mas todos têm notocorda — mesmo que apenas na fase larval. Fazem reprodução sexuada com <b>fecundação externa</b> e podem passar por fase larval.</p><p>São classificados em dois grupos, e a diferença entre eles é justamente <b>onde fica</b> e <b>por quanto tempo dura</b> a notocorda:</p><div class="rolagem"><table><tr><th>Grupo</th><th>A notocorda...</th><th>Exemplo</th></tr><tr><td>Urocordados</td><td>fica restrita à <b>cauda</b> e ocorre apenas na <b>fase larval</b></td><td>ascídia</td></tr><tr><td>Cefalocordados</td><td>vai da <b>cabeça à cauda</b> e permanece <b>durante toda a vida</b></td><td>anfioxo</td></tr></table></div><p>A <b>ascídia</b> é um animal <i>séssil</i> — quer dizer, fica fixa num lugar, como as pedras e os corais — e filtra a água para obter alimento.</p><p>O <b>anfioxo</b> mede até 5 cm, vive parcialmente enterrado na areia do mar e também filtra a água. Como mantém o cordão nervoso dorsal e a notocorda durante todo o desenvolvimento, ele virou <b>objeto de estudo sobre a evolução dos cordados</b>: pesquisas com anfioxos já trouxeram informações importantes sobre como o cérebro dos cordados evoluiu.</p><div class="destaque"><b>Truque para não confundir:</b> <b>Uro</b>cordado lembra a caUda (a notocorda só na cauda, só na larva). <b>Céfalo</b>cordado lembra "cabeça" (a notocorda vai da cabeça à cauda, a vida toda).</div>',
+    qs:[
+      {p:"Por que os protocordados não são classificados como vertebrados, mesmo sendo cordados?",
+       rm:"Porque não têm vértebras nem crânio — as duas estruturas exclusivas dos vertebrados. Eles têm notocorda (ao menos na fase larval), o que os mantém no filo dos cordados."},
+      {p:"Qual é a diferença entre urocordados e cefalocordados? Dê o exemplo de cada um.",
+       rm:"No urocordado a notocorda fica restrita à cauda e existe só na fase larval — exemplo: ascídia. No cefalocordado a notocorda vai da cabeça à cauda e dura a vida toda — exemplo: anfioxo."},
+      {p:"Um animal marinho pequeno, sem crânio, com notocorda que vai da cabeça à cauda e dura a vida inteira. Que grupo é esse e qual o exemplo do livro?",
+       rm:"É um cefalocordado, e o exemplo é o anfioxo. Ele é protocordado, então não tem vértebras nem crânio."}
+    ]},
+
+  { tag:"Capítulo 11", titulo:"Vertebrados: vértebras e crânio, com exclusividade",
+    html:'<p>Os vertebrados surgiram no período <b>Cambriano</b>, há <b>meio bilhão de anos</b>, e hoje habitam quase todos os ambientes da Terra. Existem mais de <b>55 mil espécies</b> conhecidas — um número pequeno perto do dos insetos (mais de 1 milhão de espécies descritas). Mesmo assim, os vertebrados se destacam por serem o grupo de animais com <b>maior volume</b> a habitar a Terra.</p><div class="destaque"><b>Duas estruturas exclusivas dos vertebrados:</b> <b>vértebras</b> e <b>crânio</b>. Nenhum protocordado tem isso.</div><p><b>Esqueleto interno.</b> Pode ser <b>ósseo</b> — formado por células vivas mais uma parte inorgânica, que confere rigidez — ou <b>cartilaginoso</b>, formado por cartilagem. Nos dois casos, o esqueleto é responsável pela <b>sustentação do corpo, pela proteção dos órgãos e pela locomoção</b>.</p><p><b>Cartilagem:</b> tecido muito forte e resistente, porém <b>flexível</b>. No corpo humano ela aparece nas orelhas, na ponta do nariz e nos discos intervertebrais — pequenas "almofadas" entre as vértebras que amortecem movimentos, saltos e pulos.</p><p><b>Crânio.</b> É uma estrutura óssea ou cartilaginosa que envolve o <b>encéfalo</b> (do qual o cérebro faz parte), funcionando como uma caixa de proteção.</p><p><b>Coluna vertebral.</b> Formada por um conjunto de vértebras que protegem a <b>medula espinal</b>, importante órgão do sistema nervoso. Ela também promove a sustentação e o equilíbrio do corpo. Em alguns cordados a coluna substitui parcialmente a notocorda — e parte dessa notocorda passa a compor os <b>discos intervertebrais</b>. No ser humano a coluna tem as regiões <b>cervical, torácica e lombar</b>, terminando no <b>osso sacro</b>.</p>',
+    qs:[
+      {p:"Quais são as duas estruturas exclusivas dos vertebrados, e quando esse grupo surgiu?",
+       rm:"Vértebras e crânio. Os vertebrados surgiram no período Cambriano, há meio bilhão de anos."},
+      {p:"Quais são os dois tipos de esqueleto interno dos vertebrados e quais as três funções do esqueleto?",
+       rm:"Ósseo (células vivas + uma parte inorgânica que dá rigidez) ou cartilaginoso (formado por cartilagem). Funções: sustentação do corpo, proteção dos órgãos e locomoção."},
+      {p:"Qual é a relação entre a notocorda e os discos intervertebrais?",
+       rm:"Quando a coluna vertebral substitui parcialmente a notocorda, uma parte dessa notocorda não desaparece: ela passa a formar os discos intervertebrais, as almofadas de cartilagem que ficam entre as vértebras e amortecem os movimentos."}
+    ]},
+
+  { tag:"Capítulo 11", titulo:"Ágnatos e gnatostomados: a história da mandíbula",
+    html:'<p>A <b>mandíbula</b> é uma estrutura <b>móvel e articulada</b> que auxilia na mordida e na mastigação. A maioria dos vertebrados tem mandíbula — e é por ela que o grupo se divide em dois:</p><div class="rolagem"><table><tr><th>Grupo</th><th>Mandíbula</th><th>Representantes</th></tr><tr><td>Ágnatos</td><td><b>Não</b> têm</td><td>ciclóstomos (lampreia, peixe-bruxa)</td></tr><tr><td>Gnatostomados</td><td><b>Têm</b></td><td>peixes, anfíbios, répteis, aves, mamíferos</td></tr></table></div><div class="destaque"><b>De onde vem a palavra:</b> "ágnato" vem do grego, em que <i>a</i> significa "ausência, negação" e <i>gnatha</i> significa "mandíbula". Ou seja, <b>ágnato = organismo sem mandíbula</b>.</div><p>Os <b>ciclóstomos</b> — como as lampreias e os peixes-bruxa — são considerados os <b>vertebrados mais antigos evolutivamente</b>. Podem habitar tanto água doce quanto água salgada e vivem enterrados na areia ou grudados em outros vertebrados, como baleias, golfinhos e peixes maiores, dos quais são <b>parasitas</b>.</p><ul><li>corpo <b>cilíndrico e alongado</b>;</li><li><b>boca circular</b> com dentes que auxiliam na fixação ao hospedeiro;</li><li>esqueleto <b>cartilaginoso</b>;</li><li>coluna vertebral <b>incompleta</b>.</li></ul><div class="armadilha"><b>Pegadinha clássica:</b> a lampreia parece um peixe, mas <b>não é</b> classificada com os peixes. Ela é um ciclóstomo, e portanto um <b>ágnato</b> — sem mandíbula. Os peixes são gnatostomados.</div>',
+    qs:[
+      {p:"O que é a mandíbula e quais dois grupos de vertebrados ela separa?",
+       rm:"É uma estrutura móvel e articulada que auxilia na mordida e na mastigação. Ela separa os vertebrados em gnatostomados (que têm mandíbula: peixes, anfíbios, répteis, aves e mamíferos) e ágnatos (que não têm: os ciclóstomos)."},
+      {p:"Descreva os ciclóstomos: formato do corpo, boca, esqueleto e coluna vertebral.",
+       rm:"Corpo cilíndrico e alongado; boca circular com dentes que ajudam na fixação ao hospedeiro (muitos são parasitas); esqueleto cartilaginoso; coluna vertebral incompleta. São os vertebrados mais antigos evolutivamente."},
+      {p:"Que critério separa os vertebrados em ágnatos e gnatostomados? Dê um exemplo de cada.",
+       rm:"O critério é a presença ou ausência de mandíbula. Ágnatos não têm mandíbula (exemplo: lampreia ou peixe-bruxa, que são ciclóstomos). Gnatostomados têm mandíbula (exemplo: qualquer peixe, anfíbio, réptil, ave ou mamífero)."}
+    ]},
+
+  { tag:"Capítulo 11", titulo:"Como funciona o corpo de um vertebrado",
+    html:'<ul><li><b>Sistema digestório completo</b>, com boca e ânus.</li><li><b>Sistema circulatório fechado</b> — o sangue circula sempre dentro dos vasos. O formato do coração varia entre os grupos.</li><li><b>Respiração</b> pulmonar, branquial ou cutânea, dependendo do hábitat.</li><li><b>Sistema nervoso</b> dorsal e bem desenvolvido.</li><li><b>Reprodução sexuada</b>, com fecundação interna ou externa, podendo passar por fase larval. A maioria tem sexos separados, mas existem espécies <b>hermafroditas</b> (indivíduos com ambos os sexos).</li></ul><div class="destaque"><b>Cloaca:</b> orifício comum aos sistemas excretor, digestório e reprodutivo. Quem tem cloaca: peixes cartilaginosos, anfíbios, répteis e aves. Quem tem ânus separado: peixes ósseos e mamíferos.</div><p><b>Ectotérmicos:</b> animais que usam uma <b>fonte externa</b> de calor, como o Sol, para regular a temperatura corporal.<br><b>Endotérmicos:</b> animais que <b>produzem calor</b> por meio de reações químicas que ocorrem no próprio organismo.</p><div class="armadilha"><b>Cuidado com a armadilha:</b> ectotérmico <b>não</b> quer dizer "não consegue regular a temperatura". Ele regula sim — só que buscando calor <b>fora</b> do corpo (sol, sombra, água). Provas adoram essa troca.</div><p>De acordo com os estudos evolutivos, a vida se iniciou na água. As evidências científicas indicam que a evolução dos vertebrados se deu <b>a partir dos peixes</b>, com os <b>anfíbios representando a transição para o ambiente terrestre</b>, onde se estabeleceram répteis, aves e mamíferos.</p><div class="fluxo"><span class="no">Peixes</span><span class="seta">→</span><span class="no">Anfíbios</span><span class="seta">→</span><span class="no">Répteis</span><span class="seta">→</span><span class="no">Aves</span><span class="seta">→</span><span class="no">Mamíferos</span></div>',
+    qs:[
+      {p:"O que é a cloaca, e quais grupos de vertebrados a possuem?",
+       rm:"É um orifício comum aos sistemas excretor, digestório e reprodutivo. Têm cloaca: peixes cartilaginosos, anfíbios, répteis e aves. Peixes ósseos e mamíferos têm ânus separado."},
+      {p:"Explique com suas palavras a diferença entre um animal ectotérmico e um endotérmico.",
+       rm:"O ectotérmico usa uma fonte externa de calor, como o Sol, para regular a temperatura do corpo (peixes, anfíbios e répteis). O endotérmico produz o próprio calor por reações químicas dentro do organismo (aves e mamíferos). Atenção: o ectotérmico também regula a temperatura — só que buscando o calor fora do corpo."},
+      {p:"Por que um lagarto passa a manhã tomando sol numa pedra, e um cachorro não precisa fazer isso?",
+       rm:"Porque o lagarto (réptil) é ectotérmico: depende de uma fonte externa de calor, como o Sol, para aquecer o corpo. O cachorro (mamífero) é endotérmico: produz o próprio calor por reações químicas dentro do organismo."}
+    ]},
+
+  { tag:"Capítulo 11", titulo:"A tabela dos cinco grupos (a mais cobrada da prova)",
+    html:'<p>Esta é a tabela que mais aparece em avaliação. Vale a pena ler linha por linha e depois tentar reconstruí-la de cabeça.</p><div class="rolagem"><table><tr><th></th><th>Peixes</th><th>Anfíbios</th><th>Répteis</th><th>Aves</th><th>Mamíferos</th></tr><tr><td>Coração</td><td>2 cavidades: 1 átrio, 1 ventrículo</td><td>3 cavidades: 2 átrios, 1 ventrículo</td><td>3 cavidades: 2 átrios, 1 ventrículo parcialmente separado <b>(exceção: crocodilianos, com 4)</b></td><td>4 cavidades: 2 átrios, 2 ventrículos totalmente separados</td><td>4 cavidades: 2 átrios, 2 ventrículos totalmente separados</td></tr><tr><td>Respiração</td><td>branquial; pulmonar (alguns)</td><td>branquial (fase larval e alguns adultos); pulmonar e cutânea (maioria dos adultos)</td><td>pulmonar</td><td>pulmonar (sacos aéreos)</td><td>pulmonar (alvéolos pulmonares)</td></tr><tr><td>Temperatura</td><td>ectotérmicos</td><td>ectotérmicos</td><td>ectotérmicos</td><td><b>endotérmicos</b></td><td><b>endotérmicos</b></td></tr><tr><td>Sistema digestório</td><td>completo, com boca e ânus (ósseos) ou cloaca (cartilaginosos)</td><td>completo, com boca e cloaca</td><td>completo, com boca e cloaca</td><td>completo, com boca e cloaca</td><td>completo, com boca e ânus</td></tr><tr><td>Reprodução</td><td>fecundação interna e externa; desenvolvimento direto e indireto; ovíparos (a maioria), ovovivíparos (algumas espécies de tubarão) e vivíparos (alguns cartilaginosos e certos peixes menores)</td><td>fecundação interna (salamandras e cecílias) e externa (sapos e rãs); desenvolvimento indireto; ovíparos</td><td>fecundação interna; desenvolvimento direto; ovíparos, ovovivíparos e vivíparos</td><td>fecundação interna; desenvolvimento direto; ovíparos</td><td>fecundação interna; desenvolvimento direto; vivíparos (a maioria)</td></tr></table></div><div class="destaque"><b>Três chaves para memorizar:</b> 1) as cavidades do coração vão 2 → 3 → 3 → 4 → 4, na mesma ordem da evolução; 2) só aves e mamíferos são endotérmicos; 3) só peixes ósseos e mamíferos terminam em ânus — o resto termina em cloaca.</div>',
+    qs:[
+      {p:"Escreva, na ordem da evolução, quantas cavidades tem o coração de cada um dos cinco grupos — e cite a exceção.",
+       rm:"Peixes: 2 (1 átrio e 1 ventrículo). Anfíbios: 3 (2 átrios e 1 ventrículo). Répteis: 3 (2 átrios e 1 ventrículo parcialmente separado), com exceção dos crocodilianos, que têm 4. Aves: 4. Mamíferos: 4 (2 átrios e 2 ventrículos totalmente separados). A sequência é 2 → 3 → 3 → 4 → 4."},
+      {p:"Quais grupos são endotérmicos, e qual é a diferença na respiração pulmonar entre eles?",
+       rm:"Só as aves e os mamíferos são endotérmicos. As aves têm respiração pulmonar com sacos aéreos; os mamíferos, com alvéolos pulmonares."},
+      {p:"Feche a tabela e responda: quantas cavidades tem o coração de um jacaré? E de um sapo?",
+       rm:"O jacaré é um crocodiliano, a exceção dos répteis: tem 4 cavidades. Os demais répteis têm 3 (2 átrios e 1 ventrículo parcialmente separado). O sapo é anfíbio: 3 cavidades (2 átrios e 1 ventrículo)."}
+    ]},
+
+  { tag:"Capítulo 12", titulo:"Peixes: os primeiros animais com mandíbula",
+    html:'<p>A teoria da evolução, elaborada pelo cientista britânico <b>Charles Darwin</b>, fundamenta o conhecimento de como as espécies podem evoluir e se adaptar a diferentes ambientes. Peixes e anfíbios, junto com os ciclóstomos, são os <b>primeiros vertebrados dentro da escala de evolução</b>.</p><p>Os peixes são os <b>primeiros animais com mandíbulas</b>, formando o grupo mais antigo dentre os <b>gnatostomados</b>. Também apresentam <b>coluna vertebral completa</b> (diferente dos ciclóstomos!). Têm representantes marinhos e de água doce, tamanhos e formas variados — da manjubinha, de poucos centímetros, ao tubarão-baleia, de até 20 metros. São <b>ectotérmicos</b>.</p><div class="destaque"><b>Os dois grupos de peixes:</b> <b>cartilaginosos</b> (ou condrictes) e <b>ósseos</b> (ou osteíctes). O critério é o tipo de esqueleto.</div><p><b>Nutrição e digestão.</b> Os peixes podem ser carnívoros, herbívoros ou onívoros, e existem ainda <b>filtradores</b>, que se alimentam de plâncton. A mandíbula auxilia na mordida e na mastigação do alimento. O tubo digestório é completo: começa na boca e termina na <b>cloaca</b> (peixes cartilaginosos) ou no <b>ânus</b> (peixes ósseos).</p>',
+    qs:[
+      {p:"Quem elaborou a teoria da evolução, e quais são os primeiros vertebrados dentro da escala de evolução?",
+       rm:"A teoria da evolução foi elaborada pelo cientista britânico Charles Darwin. Os primeiros vertebrados na escala de evolução são os peixes e os anfíbios, junto com os ciclóstomos."},
+      {p:"Como pode ser a alimentação dos peixes, e onde começa e termina o tubo digestório deles?",
+       rm:"Podem ser carnívoros, herbívoros ou onívoros, e existem ainda os filtradores, que se alimentam de plâncton. O tubo digestório é completo: começa na boca e termina na cloaca (nos cartilaginosos) ou no ânus (nos ósseos)."},
+      {p:"Duas coisas separam um peixe de uma lampreia. Quais são?",
+       rm:"O peixe tem mandíbula (é gnatostomado) e coluna vertebral completa. A lampreia é ágnata (sem mandíbula) e tem coluna vertebral incompleta, além de esqueleto cartilaginoso."}
+    ]},
+
+  { tag:"Capítulo 12", titulo:"Respiração e circulação dos peixes",
+    html:'<p>A respiração dos peixes é <b>branquial</b>: eles absorvem o gás oxigênio dissolvido na água e eliminam o gás carbônico por meio das <b>brânquias</b>, estruturas pelas quais a água passa em fluxo contínuo ao entrar pela boca.</p><p>Há algumas espécies conhecidas como <b>peixes pulmonados</b> que, além das brânquias, têm estruturas semelhantes a pulmões, capazes de absorver o oxigênio do ar. Vivem em regiões onde, na época da seca, o volume de água se reduz e impede a respiração branquial. Alguns podem se enterrar na areia e entrar em estado de <b>dormência</b> até a água retornar. A <b>piramboia</b>, peixe brasileiro da região da Amazônia, é um exemplo.</p><p>Os peixes apresentam <b>circulação fechada</b> — o sangue circula sempre no interior dos vasos sanguíneos. O bombeamento é feito pelo coração, que possui <b>duas cavidades: um átrio e um ventrículo</b>. O sangue é oxigenado nas brânquias.</p>',
+    qs:[
+      {p:"Explique como funciona a respiração branquial dos peixes.",
+       rm:"A água entra pela boca em fluxo contínuo e passa pelas brânquias, onde o peixe absorve o gás oxigênio dissolvido na água e elimina o gás carbônico."},
+      {p:"Como é a circulação e o coração dos peixes, e onde o sangue é oxigenado?",
+       rm:"A circulação é fechada: o sangue circula sempre dentro dos vasos sanguíneos. O coração tem duas cavidades — um átrio e um ventrículo — e o sangue é oxigenado nas brânquias."},
+      {p:"Por que a piramboia sobrevive quando o rio seca, e outros peixes não?",
+       rm:"Porque ela é um peixe pulmonado: além das brânquias, tem estruturas semelhantes a pulmões que absorvem oxigênio do ar. Pode ainda se enterrar na areia e entrar em dormência até a água voltar."}
+    ]},
+
+  { tag:"Capítulo 12", titulo:"Sentidos e reprodução dos peixes",
+    html:'<p>O sistema sensorial dos peixes é bastante desenvolvido: têm órgãos para a visão, audição aguçada, olfato e paladar bem desenvolvidos, com receptores químicos nas narinas e na boca. Alguns apresentam <b>barbilhões</b> — estruturas parecidas com "bigodes" que percebem sensações gustativas e táteis (a pirarara, da Bacia Amazônica, é um exemplo).</p><div class="destaque"><b>Linha lateral:</b> estrutura sensorial formada por <b>escamas porosas</b> que captam as vibrações na água, auxiliando na caça e na fuga de predadores. Também identifica alterações de <b>pressão</b> e <b>temperatura</b> da água.</div><p><b>Reprodução.</b> Os peixes apresentam reprodução <b>sexuada</b> e, em geral, indivíduos de <b>sexos separados</b>. A fecundação é <b>externa na maioria</b>; no entanto, alguns peixes cartilaginosos realizam <b>fecundação interna</b> — nesses casos, a cópula é feita por uma estrutura chamada <b>clásper</b>, presente no corpo dos machos.</p><p>O desenvolvimento dos embriões pode ser <b>direto ou indireto</b>. No desenvolvimento indireto são produzidas larvas chamadas <b>alevinos</b>, que depois se desenvolvem em indivíduos adultos.</p><p><b>Piracema:</b> durante as chuvas de verão, alguns peixes nadam <b>contra a correnteza</b>, rio acima, em direção às águas calmas das nascentes. A subida é tão difícil que eles perdem gordura corporal e produzem hormônios que estimulam o amadurecimento das glândulas sexuais, favorecendo a reprodução. Ao chegar, machos e fêmeas liberam seus gametas na água, onde ocorre a fecundação.</p><div class="curio"><b>Curiosidade do livro:</b> nos cavalos-marinhos, a fêmea deposita os óvulos dentro de uma bolsa localizada no abdome do <b>macho</b>. Ali eles são fecundados e permanecem até se desenvolverem — ou seja, é o macho quem carrega os ovos.</div>',
+    qs:[
+      {p:"O que são os barbilhões, para que servem e qual peixe do livro os possui?",
+       rm:"São estruturas parecidas com bigodes que percebem sensações gustativas e táteis. O exemplo do livro é a pirarara, peixe da Bacia Amazônica."},
+      {p:"O que acontece com os peixes durante a piracema, e por que isso favorece a reprodução?",
+       rm:"Eles nadam contra a correnteza, rio acima, até as águas calmas das nascentes. A subida é tão difícil que perdem gordura corporal e produzem hormônios que estimulam o amadurecimento das glândulas sexuais. Ao chegar, machos e fêmeas liberam os gametas na água, onde ocorre a fecundação."},
+      {p:"Um peixe nada em água escura e mesmo assim desvia de um predador que se aproxima. Qual estrutura explica isso?",
+       rm:"A linha lateral: escamas porosas que captam as vibrações da água e detectam alterações de pressão, avisando o peixe da aproximação de outro animal mesmo sem ele enxergar."}
+    ]},
+
+  { tag:"Capítulo 12", titulo:"Corpo de nadador: hidrodinâmica, nadadeiras e bexiga natatória",
+    html:'<p>Os peixes são organismos totalmente adaptados ao ambiente aquático. O corpo apresenta boa <i>hidrodinâmica</i> — formato que ajuda na passagem da água pela parte externa do corpo, diminuindo a resistência da água durante o nado.</p><p>A maioria das espécies tem o corpo revestido por <b>escamas sobrepostas como as telhas de um telhado</b>. Em algumas espécies, uma camada de <b>muco</b> revestindo o corpo torna o animal escorregadio. Essas características <b>diminuem o atrito</b> do corpo com a água, facilitando o nado.</p><p><b>Nadadeiras.</b> São estruturas locomotoras que auxiliam no nado, estabilizando o corpo e deslocando a água ao redor. Em geral existem <b>cinco tipos</b>: <b>caudal, pélvica, dorsal, peitoral e lateral</b>. Em algumas espécies podem estar fundidas, modificadas ou ausentes.</p><div class="destaque"><b>Bexiga natatória — presente apenas nos peixes ósseos.</b> É um órgão elástico capaz de armazenar gás, que ajuda o peixe a manter a <b>flutuabilidade neutra</b> e a posição vertical na coluna de água.<br>↓ <b>Descendo:</b> a pressão da água aumenta sobre o corpo e sobre a bexiga, diminuindo seu volume e reduzindo a flutuabilidade. Para evitar isso, o peixe <b>secreta gás dentro</b> da bexiga.<br>↑ <b>Subindo:</b> a pressão diminui e a bexiga se expande, aumentando a flutuabilidade. O peixe então <b>retira gás</b> da bexiga.</div><div class="curio"><b>Curiosidade:</b> o baiacu, quando se sente ameaçado, engole uma grande quantidade de água que se acumula no estômago de parede bastante flexível. O animal infla, assume forma esférica e aumenta até <b>três vezes</b> o tamanho original — uma estratégia de defesa que reduz o risco de ser predado.</div>',
+    qs:[
+      {p:"Como as escamas e o muco ajudam o peixe a nadar?",
+       rm:"As escamas ficam sobrepostas como as telhas de um telhado, e o muco torna o corpo escorregadio. As duas coisas diminuem o atrito do corpo com a água, facilitando o nado."},
+      {p:"Quais são os cinco tipos de nadadeiras e qual é a função delas?",
+       rm:"Caudal, pélvica, dorsal, peitoral e lateral. Elas auxiliam no nado, estabilizando o corpo e deslocando a água ao redor. Em algumas espécies podem estar fundidas, modificadas ou ausentes."},
+      {p:"Um tubarão precisa nadar quase o tempo todo para não afundar. Que órgão ele não tem, e por quê?",
+       rm:"Ele não tem bexiga natatória, porque esse órgão é exclusivo dos peixes ósseos — e o tubarão é um peixe cartilaginoso (condricte). Sem a bexiga, ele não consegue ajustar a flutuabilidade armazenando gás."}
+    ]},
+
+  { tag:"Capítulo 12", titulo:"Condrictes × Osteíctes: a comparação da prova",
+    html:'<p><b>Peixes cartilaginosos (condrictes)</b> habitam principalmente os ambientes marinhos. A pele é revestida por <b>escamas placoides</b> — escamas em formato de placas, com composição semelhante à dos dentes de outros vertebrados: cobertas por <b>esmalte</b> e com a parte interna formada por <b>dentina</b>.</p><ul><li>corpo <b>fusiforme</b> e <b>boca ventral</b> (embaixo), com várias filas de dentes pontiagudos;</li><li>orifícios anal, genital e urinário se unem na <b>cloaca</b>;</li><li>de <b>cinco a sete pares de fendas branquiais expostas</b>, posicionadas lateralmente na cabeça (sem opérculo);</li><li>olfato e visão bem desenvolvidos e linha lateral bastante sensível à pressão da água;</li><li><b>ampolas de Lorenzini</b>: estruturas na cabeça que percebem pequenos estímulos de <b>correntes elétricas</b> vindos da musculatura de outros animais, aumentando as chances de capturar uma presa;</li><li>sexos separados, <b>fecundação interna</b>, <b>desenvolvimento direto</b> (sem fase larval); podem ser ovíparos, vivíparos ou ovovivíparos;</li><li>exemplos: <b>tubarões (cações), quimeras e arraias</b>.</li></ul><div class="curio"><b>Vale saber:</b> a pesca predatória desses animais é um grave problema para o ecossistema marinho, pois eles são essenciais na manutenção do equilíbrio das cadeias alimentares. Muitos tubarões são vendidos com o nome de "cação" — a maioria dos consumidores desconhece a origem.</div><p><b>Peixes ósseos (osteíctes)</b> compõem um grupo com grande diversidade, tanto de água doce como salgada. A maioria tem o corpo revestido de <b>escamas dérmicas</b> e apresenta <b>bexiga natatória</b>, uma exclusividade do grupo.</p><ul><li>possuem brânquias, como os cartilaginosos, porém elas são cobertas pelos <b>opérculos</b> — estruturas que protegem as brânquias e se abrem e fecham, auxiliando no bombeamento de água;</li><li>orifícios anal e urogenital <b>independentes</b>; a maioria apresenta bexiga urinária;</li><li>a <b>boca</b> está em posição <b>terminal ou frontal</b> (na frente), diferente da boca ventral dos cartilaginosos;</li><li>visão, audição e olfato razoavelmente bem desenvolvidos, variando com a espécie;</li><li>separação de sexo, muitos com <b>dimorfismo sexual</b> (o macho é diferente da fêmea); <b>fecundação externa</b> na maioria;</li><li>exemplos: <b>piranhas, lambaris, baiacus, cavalos-marinhos, garoupas e pirarucus</b>.</li></ul><div class="rolagem"><table><tr><th></th><th>Cartilaginosos (condrictes)</th><th>Ósseos (osteíctes)</th></tr><tr><td>Esqueleto</td><td>cartilaginoso</td><td>ósseo</td></tr><tr><td>Escamas</td><td>placoides (como dentes: esmalte + dentina)</td><td>dérmicas</td></tr><tr><td>Brânquias</td><td>5 a 7 pares de fendas expostas</td><td>cobertas pelo opérculo</td></tr><tr><td>Boca</td><td>ventral</td><td>terminal / frontal</td></tr><tr><td>Saída</td><td>cloaca</td><td>orifícios anal e urogenital independentes</td></tr><tr><td>Bexiga natatória</td><td>não têm</td><td>têm (exclusiva do grupo)</td></tr><tr><td>Fecundação</td><td>interna (clásper)</td><td>externa na maioria</td></tr><tr><td>Desenvolvimento</td><td>direto (sem larva)</td><td>direto ou indireto (alevinos)</td></tr><tr><td>Exemplos</td><td>tubarão, arraia, quimera</td><td>piranha, lambari, garoupa, pirarucu, cavalo-marinho, baiacu</td></tr></table></div>',
+    qs:[
+      {p:"Compare as escamas dos peixes cartilaginosos com as dos peixes ósseos.",
+       rm:"Os cartilaginosos têm escamas placoides: em formato de placas, com composição parecida com a dos dentes — esmalte por fora e dentina por dentro. Os ósseos têm escamas dérmicas."},
+      {p:"Compare a fecundação e o desenvolvimento dos dois grupos de peixes.",
+       rm:"Cartilaginosos: fecundação interna (com o clásper do macho) e desenvolvimento direto, sem fase larval. Ósseos: fecundação externa na maioria, e o desenvolvimento pode ser direto ou indireto (com larvas chamadas alevinos)."},
+      {p:"Você recebe a foto de um peixe: boca embaixo do focinho e várias fendas visíveis na lateral da cabeça. Cartilaginoso ou ósseo? Como você sabe?",
+       rm:"Cartilaginoso. Dois sinais: a boca ventral (embaixo) e as fendas branquiais expostas na lateral da cabeça. Num peixe ósseo a boca é terminal/frontal e as brânquias ficam escondidas atrás do opérculo."}
+    ]},
+
+  { tag:"Capítulo 12", titulo:"Abissais — e a porta de entrada dos anfíbios",
+    html:'<p>Algumas espécies de peixes desenvolveram características que as ajudam a viver em ambientes <b>totalmente sem luz</b>, sobrevivendo nos oceanos profundos ou nas cavernas oceânicas.</p><p>Os <b>peixes abissais</b> habitam as grandes profundidades e resistem à alta pressão da coluna de água, à baixa temperatura e à pouca disponibilidade de alimento. Alguns apresentam <b>bioluminescência</b>, que utilizam para atrair as presas — é o caso do <b>peixe-diabo-negro</b>.</p><div class="destaque"><b>Abissal:</b> relacionado a grandes profundidades.</div><p><b>Fecha o conteúdo da prova.</b> O trecho abaixo é o começo do próximo assunto — leia para não ser pego de surpresa, mas o foco da avaliação está em tudo o que veio antes.</p><p><b>Anfíbios: a transição para o ambiente terrestre.</b> Os anfíbios foram os <b>primeiros vertebrados a alcançar o ambiente terrestre</b>, graças a características adquiridas evolutivamente. Mesmo assim, permanecem <b>dependentes do meio aquático</b> para a reprodução, para o desenvolvimento até a fase adulta e para a hidratação da pele.</p><p>A pele dos anfíbios é <b>fina e com pouca queratina</b>, o que a torna <b>permeável</b> e pode provocar perda de água, causando desidratação e ressecamento. Por isso é recoberta por <b>muco</b>, para manter-se hidratada — e por isso os anfíbios vivem em ambientes úmidos ou próximos a lagos. São <b>ectotérmicos</b>.</p><div class="destaque"><b>De onde vem a palavra:</b> "anfíbio" vem do grego <i>amphi</i> = "dos dois lados" e <i>bios</i> = "vida", isto é, <b>vida dupla</b> — uma fase no ambiente aquático e outra no terrestre.</div><p><b>Queratina:</b> proteína presente na pele cuja função é impermeabilizar e proteger contra a dessecação. Ela forma unhas, pelos, cabelos, penas e alguns tipos de escamas.</p>',
+    qs:[
+      {p:"O que são os peixes abissais, e o que alguns deles usam para atrair as presas?",
+       rm:"São peixes que habitam as grandes profundidades, resistindo à alta pressão da coluna de água, à baixa temperatura e à pouca disponibilidade de alimento. Alguns têm bioluminescência para atrair as presas, como o peixe-diabo-negro."},
+      {p:"Para quais três coisas os anfíbios ainda dependem do meio aquático?",
+       rm:"Para a reprodução, para o desenvolvimento até a fase adulta e para a hidratação da pele — que é fina, tem pouca queratina e por isso perde água com facilidade, precisando do muco e de ambientes úmidos."},
+      {p:"Por que um sapo não sobrevive num deserto, mesmo sendo um animal terrestre?",
+       rm:"Porque a pele do anfíbio é fina e tem pouca queratina, então é permeável e perde água com facilidade. Sem umidade ele desidrata e resseca. Além disso, ainda depende da água para a reprodução e para o desenvolvimento até a fase adulta."}
+    ]}
+  ];
+
+  // ---------- estado ----------
+  var CHAVE = "ccf_cien7_cap11_12_leitura_v2";
   var memoria = null;
-
   function ler(){
-    try{
-      var s = localStorage.getItem(CHAVE);
-      return s ? JSON.parse(s) : {respostas:{}, salvoEm:null};
-    }catch(e){
-      return memoria || {respostas:{}, salvoEm:null};
-    }
+    try{ var s = localStorage.getItem(CHAVE); return s ? JSON.parse(s) : null; }
+    catch(e){ return memoria; }
   }
-  function gravar(obj){
-    memoria = obj;
-    try{ localStorage.setItem(CHAVE, JSON.stringify(obj)); }catch(e){}
+  function gravar(o){ memoria = o; try{ localStorage.setItem(CHAVE, JSON.stringify(o)); }catch(e){} }
+
+  var estado = ler() || {blocos:{}, salvoEm:null};
+  if(!estado.blocos) estado.blocos = {};
+  function eb(i){
+    if(!estado.blocos["b"+i]) estado.blocos["b"+i] = {r:["","",""], conf:false, av:[null,null,null]};
+    return estado.blocos["b"+i];
   }
 
-  var estado = ler();
-  if(!estado.respostas) estado.respostas = {};
-
-  var areas = Array.prototype.slice.call(document.querySelectorAll("textarea[data-chave]"));
-  areas.forEach(function(t){
-    var k = t.getAttribute("data-chave");
-    if(estado.respostas[k]) t.value = estado.respostas[k];
-    t.addEventListener("input", function(){
-      estado.respostas[k] = t.value;
-      estado.salvoEm = new Date().toISOString();
-      gravar(estado);
-      mostrarStatus();
+  // ---------- montagem ----------
+  var cont = document.getElementById("blocos");
+  BLOCOS.forEach(function(b, i){
+    var st = eb(i);
+    var div = document.createElement("div");
+    div.className = "bloco" + (st.conf ? " conferido-bloco" : "");
+    div.id = "bl-" + i;
+    var perguntas = '';
+    b.qs.forEach(function(q, j){
+      var pid = i + "-" + j;
+      perguntas += '<div class="perg' + (st.conf ? ' conferido' : '') + '" id="pg-'+pid+'">'
+        + '<div class="enun">' + (j+1) + '. ' + q.p + '</div>'
+        + '<textarea id="tx-'+pid+'" placeholder="Escreva aqui com as suas palavras..."'+(st.conf?' disabled':'')+'>'
+        + (st.r[j] ? st.r[j].replace(/&/g,"&amp;").replace(/</g,"&lt;") : "") + '</textarea>'
+        + '<div class="modelo"><b>Resposta modelo:</b> ' + q.rm + '</div>'
+        + '<div class="aval">'
+        + '<button type="button" data-av="ok" data-p="'+pid+'" class="'+(st.av[j]===1?'on-ok':'')+'">✅ Acertei</button>'
+        + '<button type="button" data-av="rev" data-p="'+pid+'" class="'+(st.av[j]===0?'on-rev':'')+'">🔁 Preciso revisar</button>'
+        + '</div></div>';
     });
+    div.innerHTML =
+        '<div class="btopo"><span class="bnum">'+(i+1)+'</span><div><div class="btag">'+b.tag+'</div><h2>'+b.titulo+'</h2></div></div>'
+      + '<div class="btexto">'+b.html+'</div>'
+      + '<div class="perguntas"><h3>✍️ Agora escreva você</h3>'
+      + '<div class="dica-uso">Responda as 3 perguntas com as suas palavras (sem olhar o texto, se conseguir). O botão libera quando as três estiverem preenchidas.</div>'
+      + perguntas
+      + '<div class="acao-bloco"><button type="button" id="bt-'+i+'" disabled>Conferir minhas respostas</button>'
+      + '<div class="obs">Preencha as 3 respostas para liberar (mínimo de 3 letras em cada).</div></div>'
+      + '<div class="finalizado">✔ Bloco concluído — compare com as respostas modelo acima e marque sua autoavaliação.</div>'
+      + '</div>';
+    cont.appendChild(div);
   });
 
-  function mostrarStatus(){
+  function podeConferir(i){
+    var st = eb(i);
+    for(var j=0;j<3;j++){
+      var tx = document.getElementById("tx-"+i+"-"+j);
+      if(!tx || tx.value.trim().length < 3) return false;
+    }
+    return true;
+  }
+
+  function atualizarBotao(i){
+    var bt = document.getElementById("bt-"+i);
+    if(bt) bt.disabled = !podeConferir(i);
+  }
+
+  function destravar(){
+    // bloco 0 sempre visível; bloco i visível se o anterior foi conferido
+    var concluidos = 0;
+    BLOCOS.forEach(function(b, i){
+      var div = document.getElementById("bl-"+i);
+      var visivel = (i === 0) || eb(i-1).conf;
+      div.classList.toggle("trancado", !visivel);
+      if(eb(i).conf) concluidos++;
+    });
+    var fim = concluidos === BLOCOS.length;
+    document.getElementById("pegadinhas").classList.toggle("trancado", !fim);
+    document.getElementById("cobertura").classList.toggle("trancado", !fim);
+    document.getElementById("fim").classList.toggle("trancado", !fim);
+    document.getElementById("barra").style.width = (concluidos/BLOCOS.length*100)+"%";
+    document.getElementById("contagem").textContent = fim
+      ? "Leitura concluída! 🎉"
+      : "Bloco " + Math.min(concluidos+1, BLOCOS.length) + " de " + BLOCOS.length;
+  }
+
+  function statusPainel(){
     var el = document.getElementById("status");
-    var n = 0;
-    for(var k in estado.respostas){ if(estado.respostas[k] && estado.respostas[k].trim()) n++; }
+    var concluidos = 0;
+    BLOCOS.forEach(function(b,i){ if(eb(i).conf) concluidos++; });
     if(estado.salvoEm){
       var d = new Date(estado.salvoEm);
       var f = ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+d.getFullYear()
             +" às "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
-      el.innerHTML = "✅ <b>"+n+"</b> de "+areas.length+" respondidas &middot; salvo em "+f;
+      el.innerHTML = "✅ <b>"+concluidos+"</b> de "+BLOCOS.length+" blocos concluídos &middot; salvo em "+f;
     }else{
       el.textContent = "Suas anotações são salvas sozinhas.";
     }
   }
-  mostrarStatus();
 
-  Array.prototype.slice.call(document.querySelectorAll(".pista button")).forEach(function(b){
-    b.addEventListener("click", function(){
-      var p = b.parentNode;
-      p.classList.toggle("aberta");
-      b.textContent = p.classList.contains("aberta") ? "Esconder a resposta" : "Ver uma resposta possível";
-    });
+  // eventos: digitação
+  cont.addEventListener("input", function(e){
+    if(e.target && e.target.tagName === "TEXTAREA"){
+      var partes = e.target.id.split("-"); // tx-i-j
+      var i = parseInt(partes[1],10), j = parseInt(partes[2],10);
+      eb(i).r[j] = e.target.value;
+      estado.salvoEm = new Date().toISOString();
+      gravar(estado);
+      atualizarBotao(i);
+      statusPainel();
+    }
   });
 
-  // ---- modal ----
+  // eventos: conferir + autoavaliação
+  cont.addEventListener("click", function(e){
+    var t = e.target;
+    if(t && t.id && t.id.indexOf("bt-") === 0){
+      var i = parseInt(t.id.slice(3),10);
+      if(!podeConferir(i)) return;
+      var st = eb(i);
+      st.conf = true;
+      estado.salvoEm = new Date().toISOString();
+      gravar(estado);
+      var div = document.getElementById("bl-"+i);
+      div.classList.add("conferido-bloco");
+      for(var j=0;j<3;j++){
+        document.getElementById("pg-"+i+"-"+j).classList.add("conferido");
+        document.getElementById("tx-"+i+"-"+j).disabled = true;
+      }
+      destravar(); statusPainel();
+      var prox = document.getElementById("bl-"+(i+1));
+      var alvo = prox && !prox.classList.contains("trancado") ? prox : document.getElementById("pegadinhas");
+      if(alvo) setTimeout(function(){ alvo.scrollIntoView({behavior:"smooth", block:"start"}); }, 250);
+      return;
+    }
+    if(t && t.getAttribute && t.getAttribute("data-av")){
+      var pid = t.getAttribute("data-p").split("-");
+      var bi = parseInt(pid[0],10), pj = parseInt(pid[1],10);
+      var stb = eb(bi);
+      stb.av[pj] = (t.getAttribute("data-av") === "ok") ? 1 : 0;
+      estado.salvoEm = new Date().toISOString();
+      gravar(estado);
+      var caixa = document.getElementById("pg-"+bi+"-"+pj);
+      var bts = caixa.querySelectorAll(".aval button");
+      bts[0].className = stb.av[pj]===1 ? "on-ok" : "";
+      bts[1].className = stb.av[pj]===0 ? "on-rev" : "";
+      statusPainel();
+    }
+  });
+
+  // estado inicial dos botões
+  BLOCOS.forEach(function(b,i){ atualizarBotao(i); });
+  destravar(); statusPainel();
+
+  // ---------- modal ----------
   var velo = document.getElementById("velo");
   var acao = null;
-  function abrirModal(titulo, texto, rotulo, calmo, fn){
-    document.getElementById("mdTitulo").textContent = titulo;
-    document.getElementById("mdTexto").textContent = texto;
+  function abrirModal(t, x, rot, calmo, fn){
+    document.getElementById("mdTitulo").textContent = t;
+    document.getElementById("mdTexto").textContent = x;
     var ok = document.getElementById("mdOk");
-    ok.textContent = rotulo;
-    ok.className = calmo ? "ok calmo" : "ok";
+    ok.textContent = rot; ok.className = calmo ? "ok calmo" : "ok";
     document.getElementById("mdCancelar").style.display = fn ? "" : "none";
-    acao = fn;
-    velo.classList.add("on");
+    acao = fn; velo.classList.add("on");
   }
   function fechar(){ velo.classList.remove("on"); acao = null; }
   document.getElementById("mdCancelar").addEventListener("click", fechar);
-  document.getElementById("mdOk").addEventListener("click", function(){
-    var f = acao; fechar(); if(f) f();
-  });
+  document.getElementById("mdOk").addEventListener("click", function(){ var f = acao; fechar(); if(f) f(); });
   velo.addEventListener("click", function(e){ if(e.target === velo) fechar(); });
 
-  // ---- exportar / importar / zerar ----
+  // ---------- exportar / importar / zerar ----------
   document.getElementById("btExportar").addEventListener("click", function(){
-    var txt = JSON.stringify(estado, null, 2);
-    var blob = new Blob([txt], {type:"application/json"});
+    var blob = new Blob([JSON.stringify(estado, null, 2)], {type:"application/json"});
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "leitura-guiada-cordados.json";
+    a.download = "leitura-cordados.json";
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
   });
-
   var arq = document.getElementById("arquivo");
   document.getElementById("btImportar").addEventListener("click", function(){ arq.click(); });
   arq.addEventListener("change", function(){
@@ -684,30 +581,23 @@ footer.rodape{text-align:center; color:var(--cinza); font-size:.8rem; padding:18
     r.onload = function(){
       try{
         var o = JSON.parse(r.result);
-        estado = {respostas: (o && o.respostas) || {}, salvoEm: new Date().toISOString()};
-        gravar(estado);
-        areas.forEach(function(t){
-          var k = t.getAttribute("data-chave");
-          t.value = estado.respostas[k] || "";
-        });
-        mostrarStatus();
-        abrirModal("Pronto", "Suas anotações foram importadas com sucesso.", "Fechar", true, null);
+        if(!o || typeof o !== "object" || !o.blocos) throw new Error("formato");
+        gravar(o);
+        abrirModal("Pronto", "Anotações importadas. A página vai recarregar.", "Fechar", true, null);
+        setTimeout(function(){ location.reload(); }, 900);
       }catch(e){
-        abrirModal("Não deu certo", "O arquivo escolhido não parece ser um backup deste material.", "Fechar", true, null);
+        abrirModal("Não deu certo", "O arquivo escolhido não parece ser um backup desta Leitura Guiada.", "Fechar", true, null);
       }
       arq.value = "";
     };
     r.readAsText(f);
   });
-
   document.getElementById("btZerar").addEventListener("click", function(){
-    abrirModal("Apagar tudo?", "Todas as suas anotações desta Leitura Guiada serão apagadas. Não dá para desfazer.", "Apagar", false, function(){
-      estado = {respostas:{}, salvoEm:null};
-      try{ localStorage.removeItem(CHAVE); }catch(e){}
-      memoria = null;
-      areas.forEach(function(t){ t.value = ""; });
-      mostrarStatus();
-    });
+    abrirModal("Apagar tudo?", "Todas as suas respostas e o progresso da leitura serão apagados. Não dá para desfazer.",
+      "Apagar", false, function(){
+        try{ localStorage.removeItem(CHAVE); }catch(e){}
+        memoria = null; location.reload();
+      });
   });
 })();
 </script>
